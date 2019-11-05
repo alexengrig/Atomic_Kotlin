@@ -2,6 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="${PROJECT_NAME}_main" target="1.8" />
+      <module name="${PROJECT_NAME}_test" target="1.8" />
+      <module name="Atomic_Kotlin_main" target="1.8" />
+      <module name="Atomic_Kotlin_test" target="1.8" />
       <module name="AtomicKotlin_main" target="1.8" />
       <module name="AtomicKotlin_test" target="1.8" />
       <module name="util_main" target="11" />

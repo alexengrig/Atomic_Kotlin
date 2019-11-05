@@ -1,5 +1,5 @@
 static String sanitizeName(String name) {
     return name.replaceAll("[ /\\\\:<>\"?*|]", "_")
 }
-rootProject.name = sanitizeName('AtomicKotlin')
+rootProject.name = sanitizeName('Atomic_Kotlin')
 include 'util'

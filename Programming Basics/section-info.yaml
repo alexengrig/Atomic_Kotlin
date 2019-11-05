@@ -1,6 +1,6 @@
 content:
 - Hello, World!
-- var   val
+- var & val
 - Data Types
 - Functions
 - if Expressions
@@ -8,7 +8,7 @@ content:
 - Number Types
 - Booleans
 - Repetition with while
-- Looping   Ranges
+- Looping & Ranges
 - The in Keyword
-- Expressions   Statements
+- Expressions & Statements
 - Summary 1
