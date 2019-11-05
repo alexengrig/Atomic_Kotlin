@@ -1,0 +1,57 @@
+type: output
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 70
+    length: 6
+    placeholder_text: TODO()
+    dependency:
+      section: Programming Basics
+      lesson: if Expressions
+      task: Exercise 3
+      file: src/Task.kt
+      placeholder: 1
+      is_visible: true
+    initial_state:
+      length: 6
+      offset: 70
+    initialized_from_dependency: false
+    possible_answer: |2-
+
+              if (first > second) first else second
+    selected: false
+    status: Unchecked
+  - offset: 153
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 153
+    initialized_from_dependency: false
+    possible_answer: |2-
+
+          val max = findMax(first, second)
+          println("The maximum between $first and $second is $max.")
+    selected: false
+    status: Unchecked
+  text: |-
+    package stringTemplates1
+
+    fun findMax(first: Int, second: Int): Int = TODO()
+
+    fun main(args: Array<String>) {
+        val first = 17
+        val second = 31
+        TODO()
+    }
+  learner_created: false
+- name: test/output.txt
+  visible: false
+  text: |
+    The maximum between 17 and 31 is 31.
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Programming+Basics+%2F+String+Templates+%2F+Exercise1
+status: Unchecked
+record: -1

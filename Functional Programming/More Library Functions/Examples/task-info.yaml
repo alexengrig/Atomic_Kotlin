@@ -1,0 +1,118 @@
+type: theory
+files:
+- name: src/NumberSequence1.kt
+  visible: true
+  text: |-
+    // MoreLibraryFunctions/NumberSequence1.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val naturalNumbers =
+        generateSequence(1) { it + 1 }
+      naturalNumbers.take(3).toList() eq
+        listOf(1, 2, 3)
+      naturalNumbers.take(10).sum() eq 55
+    }
+  learner_created: false
+- name: src/InputLines1.kt
+  visible: true
+  text: |-
+    // MoreLibraryFunctions/InputLines1.kt
+
+    fun main(args: Array<String>) {
+      val lines = generateSequence {
+        val line = readLine()
+        if (line != "XXX") line else null
+      }
+      println(lines.toList())
+    }
+    /* Input/Output:
+    >>> first
+    >>> second
+    >>> XXX
+    [first, second]
+    */
+  learner_created: false
+- name: src/InputLines2.kt
+  visible: true
+  text: |-
+    // MoreLibraryFunctions/InputLines2.kt
+
+    fun main(args: Array<String>) {
+      val lines = generateSequence {
+        readLine()?.takeIf { it != "XXX" }
+      }
+      println(lines.toList())
+    }
+    /* Input/Output:
+    >>> first
+    >>> second
+    >>> XXX
+    [first, second]
+    */
+  learner_created: false
+- name: src/DefineTakeIf.kt
+  visible: true
+  text: |-
+    // MoreLibraryFunctions/DefineTakeIf.kt
+    package definetakeif
+    import atomictest.eq
+
+    fun <T> T.takeIf(
+      predicate: (T) -> Boolean
+    ): T? {
+      return if (predicate(this)) this else null
+    }
+
+    fun main(args: Array<String>) {
+      "abc".takeIf { it != "XXX" } eq "abc"
+      "XXX".takeIf { it != "XXX" } eq null
+    }
+  learner_created: false
+- name: src/NumberSequence2.kt
+  visible: true
+  text: |-
+    // MoreLibraryFunctions/NumberSequence2.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      generateSequence(6) {
+        (it - 1).takeIf { it > 0 }
+      }.toList() eq listOf(6, 5, 4, 3, 2, 1)
+    }
+  learner_created: false
+- name: src/ReadingName.kt
+  visible: true
+  text: |-
+    // MoreLibraryFunctions/ReadingName.kt
+    fun main(args: Array<String>) {
+      println("Enter your name:")
+      readLine()
+        ?.takeUnless { it.isBlank() }
+        ?.let { println("Your name is: $it") }
+    }
+    /* Input/Output:
+    Enter your name:
+    >>> Sveta
+    Your name is: Sveta
+    */
+  learner_created: false
+- name: src/ReadingNameWithIf.kt
+  visible: true
+  text: |-
+    // MoreLibraryFunctions/ReadingNameWithIf.kt
+    fun main(args: Array<String>) {
+      println("Enter your name:")
+      val line = readLine()
+      if (line?.isNotBlank() == true) {
+        println("Your name is: $line")
+      }
+    }
+    /* Input/Output:
+    Enter your name:
+    >>> Sveta
+    Your name is: Sveta
+    */
+  learner_created: false
+status: Unchecked
+record: -1

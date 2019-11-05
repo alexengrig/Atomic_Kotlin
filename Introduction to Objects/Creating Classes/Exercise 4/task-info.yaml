@@ -1,0 +1,50 @@
+type: ide
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 49
+    length: 2
+    placeholder_text: '  '
+    initial_state:
+      length: 2
+      offset: 49
+    initialized_from_dependency: false
+    possible_answer: .capitalize()
+    selected: false
+    status: Unchecked
+  text: "package creatingClasses4\n\nfun task(s: String) = s  \n\nfun main(args: Array<String>)\
+    \ {\n    println(task(\"hi!\"))\n    println(task(\"Hi!\"))\n}\n/* Output:\nHi!\n\
+    Hi!\n */"
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package creatingClasses4
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestCapitalize() {
+        private fun testString(s: String) {
+            Assert.assertEquals("""Wrong result for task("$s"):""", s.capitalize(), task(s))
+        }
+
+        @Test fun test1() = testString("abc")
+
+        @Test fun test2() = testString("Abc")
+
+        @Test fun test3() = testString("ABC")
+
+        @Test fun test4() = testString("aBc")
+
+        @Test fun test5() = testString("abC")
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Introduction+to+Objects+%2F+Creating+Classes+%2F+Exercise4
+status: Unchecked
+record: -1

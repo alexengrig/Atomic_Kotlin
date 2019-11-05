@@ -1,0 +1,77 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 124
+    length: 24
+    placeholder_text: TODO("groupBy(???).???")
+    initial_state:
+      length: 24
+      offset: 124
+    initialized_from_dependency: false
+    possible_answer: groupBy(keySelector).mapValues { it.value.last() }
+    selected: false
+    status: Unchecked
+  text: |-
+    package fromListstoMaps03
+
+    import atomictest.eq
+
+    fun <T, R> List<T>.associateBy(keySelector: (T) -> R): Map<R, T> =
+            TODO("groupBy(???).???")
+
+    data class Person(val name: String, val age: Int)
+
+    fun main(args: Array<String>) {
+        val people = listOf(Person("Alice", 21),
+                Person("Bob", 25), Person("Charlie", 25))
+
+        people.associateBy(Person::name) eq ""
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package fromListstoMaps03
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+    import kotlin.collections.associateBy as associateByLibrary
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestPersonsMap {
+        private fun <T, R> check(
+                list: List<T>,
+                keySelector: (T) -> R,
+                keySelectorStr: String
+        ) {
+            Assert.assertEquals("Wrong result for $list associated by $keySelectorStr",
+                    list.associateByLibrary(keySelector),
+                    list.associateBy(keySelector))
+        }
+
+        @Test
+        fun test1Sample() = check(listOf(Person("Alice", 21),
+                Person("Bob", 25), Person("Charlie", 25)),
+                Person::age, "Person::age")
+
+        @Test
+        fun test2() = check(listOf("abc", "ahh", "never"),
+                { it.first() }, "{ it.first() }")
+
+        @Test
+        fun test3() = check((1..5).toList(), { it }, "{ it }")
+
+        @Test
+        fun test4() = check(listOf(Person("Alice", 21),
+                Person("Bob", 25), Person("Charlie", 25)),
+                Person::name, "Person::name")
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Functional+Programming+%2F+From+Lists+to+Maps+%2F+Exercise3
+status: Unchecked
+record: -1

@@ -1,0 +1,129 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 489
+    length: 0
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 489
+    initialized_from_dependency: false
+    possible_answer: separator, prefix, ""
+    selected: false
+    status: Unchecked
+  - offset: 578
+    length: 0
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 578
+    initialized_from_dependency: false
+    possible_answer: separator, "", ""
+    selected: false
+    status: Unchecked
+  - offset: 650
+    length: 0
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 650
+    initialized_from_dependency: false
+    possible_answer: '", ", "", ""'
+    selected: false
+    status: Unchecked
+  text: |-
+    package overloading1
+
+    import atomictest.eq
+
+    fun List<Int>.joinToString(
+      separator: String = ", ",
+      prefix: String = "",
+      postfix: String = ""
+    ): String {
+        return joinTo(StringBuilder(), separator, prefix, postfix).toString()
+    }
+
+    fun List<Int>.myJoinToString(
+      separator: String,
+      prefix: String,
+      postfix: String
+    ): String {
+        return joinToString(separator, prefix, postfix)
+    }
+
+    fun List<Int>.myJoinToString(separator: String, prefix: String): String {
+        return myJoinToString()
+    }
+
+    fun List<Int>.myJoinToString(separator: String): String {
+        return myJoinToString()
+    }
+
+    fun List<Int>.myJoinToString(): String {
+        return myJoinToString()
+    }
+
+    /*
+    fun List<Int>.myJoinToString(prefix: String, postfix: String): String {
+        return TODO()
+    }
+    */
+
+    fun main(args: Array<String>) {
+        val list = listOf(1, 2, 3)
+        list.myJoinToString() eq "1, 2, 3"
+        list.myJoinToString("|") eq "1|2|3"
+        list.myJoinToString("..", "List: ") eq "List: 1..2..3"
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package overloading1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestOverloading {
+
+        private fun testList(actual: String, expected: String) {
+            Assert.assertEquals("Wrong result: ", expected, actual)
+        }
+
+        @Test
+        fun test1Sample() {
+            val list = listOf(1, 2, 3)
+            testList(list.myJoinToString(), "1, 2, 3")
+            testList(list.myJoinToString("|"), "1|2|3")
+            testList(list.myJoinToString("..", "List: "), "List: 1..2..3")
+        }
+
+        @Test
+        fun test2() = testList(
+                listOf(1, 2, 3, 4, 5, 6).myJoinToString(""),
+                "123456"
+        )
+
+        @Test
+        fun test3() = testList(
+                listOf(1, 2, 3, 4).myJoinToString(),
+                "1, 2, 3, 4"
+        )
+
+        @Test
+        fun test4() = testList(
+                listOf(1, 2, 3, 4).myJoinToString(",", "##"),
+                "##1,2,3,4"
+        )
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Usability+%2F+Overloading+%2F+Exercise1
+status: Unchecked
+record: -1

@@ -1,0 +1,146 @@
+type: theory
+files:
+- name: src/SimpleOperation.kt
+  visible: true
+  text: |-
+    // FunctionTypes/SimpleOperation.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val isPositive: (Int) -> Boolean =
+        { it > 0 }
+      val list = listOf(1, 2, -3)
+      list.any(isPositive) eq true
+    }
+  learner_created: false
+- name: src/FunctionTypeExamples.kt
+  visible: true
+  text: |-
+    // FunctionTypes/FunctionTypeExamples.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val helloWorld: () -> String =
+        { "Hello, world!" }
+      helloWorld() eq "Hello, world!"
+
+      val sum: (Int, Int) -> Int =
+        { x, y -> x + y }
+      sum(1, 2) eq 3
+    }
+  learner_created: false
+- name: src/AnyFunImplementation.kt
+  visible: true
+  text: |-
+    // FunctionTypes/AnyFunImplementation.kt
+    import atomictest.eq
+
+    fun <T> List<T>.any(                    // [1]
+      predicate: (T) -> Boolean             // [2]
+    ): Boolean {
+      for (element in this) {
+        if (predicate(element))             // [3]
+          return true
+      }
+      return false
+    }
+
+    fun main(args: Array<String>) {
+      val ints = listOf(1, 2, -3)
+      ints.any { it > 0 } eq true           // [4]
+
+      val strings = listOf("abc", " ")
+      strings.any { it.isBlank() } eq true  // [5]
+      strings.any { it.isBlank() } eq true  // [5]
+
+      strings.any(String::isNotBlank) eq    // [6]
+        true
+    }
+  learner_created: false
+- name: src/RepeatByInt.kt
+  visible: true
+  text: |-
+    // FunctionTypes/RepeatByInt.kt
+
+    fun main(args: Array<String>) {
+      repeat(2) { println("hi!") }
+    }
+    /* Output:
+    hi!
+    hi!
+    */
+  learner_created: false
+- name: src/RepeatVerbose.kt
+  visible: true
+  text: |-
+    // FunctionTypes/RepeatVerbose.kt
+
+    fun main(args: Array<String>) {
+      repeat(2, { println("hi!") })
+    }
+    /* Output:
+    hi!
+    hi!
+    */
+  learner_created: false
+- name: src/DefiningRepeat.kt
+  visible: true
+  text: |-
+    // FunctionTypes/DefiningRepeat.kt
+    package definingrepeat
+
+    fun repeat(
+      times: Int,
+      action: (Int) -> Unit           // [1]
+    ) {
+      for (index in 0 until times)
+        action(index)                 // [2]
+    }
+
+    fun main(args: Array<String>) {
+      repeat(3) { println("#$it") }   // [3]
+    }
+    /* Output:
+    #0
+    #1
+    #2
+    */
+  learner_created: false
+- name: src/NullableReturnType.kt
+  visible: true
+  text: |-
+    // FunctionTypes/NullableReturnType.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val transform: (String) -> Int? =
+        { s: String -> s.toIntOrNull() }
+      transform("112") eq 112
+      transform("abc") eq null
+
+      val list = listOf("112", "abc")
+      list.mapNotNull(transform) eq listOf(112)
+      list.mapNotNull { it.toIntOrNull() } eq
+        listOf(112)
+    }
+  learner_created: false
+- name: src/NullableFunctionType.kt
+  visible: true
+  text: |-
+    // FunctionTypes/NullableFunctionType.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val returnTypeNullable: (String) -> Int? =
+        { null }
+      val mightBeNull: ((String) -> Int)? = null
+      returnTypeNullable("abc") eq null
+      // Won't compile without a null check:
+      // mightBeNull("abc")
+      if (mightBeNull != null) {
+        mightBeNull("abc")
+      }
+    }
+  learner_created: false
+status: Unchecked
+record: -1

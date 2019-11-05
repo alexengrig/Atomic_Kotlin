@@ -1,0 +1,157 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 131
+    length: 0
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 131
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+  - offset: 138
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 138
+    initialized_from_dependency: false
+    possible_answer: it == 0
+    selected: false
+    status: Unchecked
+  - offset: 177
+    length: 0
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 177
+    initialized_from_dependency: false
+    possible_answer: '!'
+    selected: false
+    status: Unchecked
+  - offset: 183
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 183
+    initialized_from_dependency: false
+    possible_answer: it == 0
+    selected: false
+    status: Unchecked
+  - offset: 263
+    length: 0
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 263
+    initialized_from_dependency: false
+    possible_answer: '!'
+    selected: false
+    status: Unchecked
+  - offset: 270
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 270
+    initialized_from_dependency: false
+    possible_answer: it == 0
+    selected: false
+    status: Unchecked
+  - offset: 306
+    length: 0
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 306
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+  - offset: 312
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 312
+    initialized_from_dependency: false
+    possible_answer: it == 0
+    selected: false
+    status: Unchecked
+  text: |-
+    package operationsonCollections4
+
+    import atomictest.eq
+
+    fun List<Int>.allNonZero() = all { it != 0 }
+    fun List<Int>.allNonZero1() = none { TODO() }
+    fun List<Int>.allNonZero2() = any { TODO() }
+
+    fun List<Int>.hasZero() = !all { it != 0 }
+    fun List<Int>.hasZero1() = none { TODO() }
+    fun List<Int>.hasZero2() = any { TODO() }
+
+    fun main(args: Array<String>) {
+        val list1 = listOf(1, 2, 3)
+        list1.allNonZero() eq true
+        list1.allNonZero1() eq true
+        list1.allNonZero2() eq true
+
+        list1.hasZero() eq false
+        list1.hasZero1() eq false
+        list1.hasZero2() eq false
+
+        val list2 = listOf(0, 1, 2)
+        list2.allNonZero() eq false
+        list2.allNonZero1() eq false
+        list2.allNonZero2() eq false
+
+        list2.hasZero() eq true
+        list2.hasZero1() eq true
+        list2.hasZero2() eq true
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package operationsonCollections4
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestOperations {
+        private fun check(list: List<Int>) {
+            val nonZero = list.all { it != 0 }
+            Assert.assertEquals("Wrong result for 'allNonZero($list)'", nonZero, list.allNonZero())
+            Assert.assertEquals("Wrong result for 'allNonZero1($list)'", nonZero, list.allNonZero1())
+            Assert.assertEquals("Wrong result for 'allNonZero2($list)'", nonZero, list.allNonZero2())
+
+            val hasZero = list.any { it == 0 }
+            Assert.assertEquals("Wrong result for 'hasZero($list)'", hasZero, list.hasZero())
+            Assert.assertEquals("Wrong result for 'hasZero1($list)'", hasZero, list.hasZero1())
+            Assert.assertEquals("Wrong result for 'hasZero2($list)'", hasZero, list.hasZero2())
+        }
+
+        @Test
+        fun test1Sample() = check(listOf(1, 2, 3))
+
+        @Test
+        fun test2Sample() = check(listOf(0, 1, 2))
+
+        @Test
+        fun test3() = check(listOf(0, 0, 0))
+
+        @Test
+        fun test4() = check(listOf(0, 1, 2, 0, 3, 4))
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Functional+Programming+%2F+Operations+on+Collections+%2F+Exercise4
+status: Unchecked
+record: -1

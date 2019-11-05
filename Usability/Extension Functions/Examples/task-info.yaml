@@ -1,0 +1,69 @@
+type: theory
+files:
+- name: src/Quoting.kt
+  visible: true
+  text: |-
+    // ExtensionFunctions/Quoting.kt
+    package quoting
+    import atomictest.eq
+
+    fun String.singleQuote() = "'$this'"
+    fun String.doubleQuote() = "\"$this\""
+
+    fun main(args: Array<String>) {
+      "Hi".singleQuote() eq "'Hi'"
+      "Hi".doubleQuote() eq "\"Hi\""
+    }
+  learner_created: false
+- name: src/Quote.kt
+  visible: true
+  text: |-
+    // ExtensionFunctions/Quote.kt
+    package other
+    import atomictest.eq
+    import quoting.doubleQuote
+    import quoting.singleQuote
+
+    fun main(args: Array<String>) {
+      "Single".singleQuote() eq "'Single'"
+      "Double".doubleQuote() eq "\"Double\""
+    }
+  learner_created: false
+- name: src/StrangeQuote.kt
+  visible: true
+  text: |-
+    // ExtensionFunctions/StrangeQuote.kt
+    import atomictest.eq
+    import quoting.singleQuote
+    import quoting.doubleQuote
+
+    // Apply two sets of single quotes:
+    fun String.strangeQuote() =
+      this.singleQuote().singleQuote()   // [1]
+
+    fun String.tooManyQuotes() =
+      doubleQuote().doubleQuote()        // [2]
+
+    fun main(args: Array<String>) {
+      "Hi".strangeQuote() eq "''Hi''"
+      "Hi".tooManyQuotes() eq "\"\"Hi\"\""
+    }
+  learner_created: false
+- name: src/BookExtensions.kt
+  visible: true
+  text: |-
+    // ExtensionFunctions/BookExtensions.kt
+    import atomictest.eq
+
+    class Book(val title: String)
+
+    fun Book.categorize(category: String) =
+      """title: "$title", category: $category"""
+
+    fun main(args: Array<String>) {
+      Book("Dracula").categorize("Vampire") eq
+        """title: "Dracula", category: Vampire"""
+    }
+  learner_created: false
+status: Unchecked
+record: -1

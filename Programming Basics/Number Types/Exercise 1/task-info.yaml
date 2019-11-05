@@ -1,0 +1,93 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 40
+    length: 1
+    placeholder_text: 0
+    initial_state:
+      length: 1
+      offset: 40
+    initialized_from_dependency: false
+    possible_answer: 3
+    selected: false
+    status: Unchecked
+  - offset: 61
+    length: 1
+    placeholder_text: 0
+    initial_state:
+      length: 1
+      offset: 61
+    initialized_from_dependency: false
+    possible_answer: 2
+    selected: false
+    status: Unchecked
+  - offset: 85
+    length: 1
+    placeholder_text: 0
+    initial_state:
+      length: 1
+      offset: 85
+    initialized_from_dependency: false
+    possible_answer: 11
+    selected: false
+    status: Unchecked
+  - offset: 107
+    length: 3
+    placeholder_text: 0.0
+    initial_state:
+      length: 3
+      offset: 107
+    initialized_from_dependency: false
+    possible_answer: 1.2
+    selected: false
+    status: Unchecked
+  text: |-
+    package numberTypes1
+
+    // 11 / 3
+    val a = 0
+
+    // 11 % 3
+    val b = 0
+
+    // a * 3 + b
+    val c = 0
+
+    // 6 / 5.0
+    val d = 0.0
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package numberTypes1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestNumberTypes1 {
+        @Test fun testA() {
+            Assert.assertEquals(3, a)
+        }
+
+        @Test fun testB() {
+            Assert.assertEquals(2, b)
+        }
+
+        @Test fun testC() {
+            Assert.assertEquals(11, c)
+        }
+
+        @Test fun testD() {
+            Assert.assertEquals(1.2, d.toDouble(), 0.0001)
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Programming+Basics+%2F+Number+Types+%2F+Exercise1
+status: Unchecked
+record: -1

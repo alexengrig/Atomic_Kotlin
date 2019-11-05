@@ -1,0 +1,66 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 111
+    length: 26
+    placeholder_text: TODO("mapIndexed { ??? }")
+    initial_state:
+      length: 26
+      offset: 111
+    initialized_from_dependency: false
+    possible_answer: mapIndexed { index, e -> Pair(e, index) }
+    selected: false
+    status: Unchecked
+  text: |-
+    package manipulatingLists2
+
+    import atomictest.eq
+
+    fun <T> List<T>.zipWithIndex(): List<Pair<T, Int>> =
+            TODO("mapIndexed { ??? }")
+
+    fun main(args: Array<String>) {
+        val list = listOf('a', 'b', 'c')
+        list.zipWithIndex() eq
+                "[(a, 0), (b, 1), (c, 2)]"
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package manipulatingLists2
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestMapImpl {
+        private fun <T> check(
+                list: List<T>
+        ) {
+            Assert.assertEquals("Wrong result for $list:",
+                    list.zip(list.indices),
+                    list.zipWithIndex())
+        }
+
+        @Test
+        fun test1Sample() = check(listOf('a', 'b', 'c'))
+
+        @Test
+        fun test2() = check(listOf(1, 2, 3, 4, 5))
+
+        @Test
+        fun test3() = check(listOf("ab", "bd"))
+
+        @Test
+        fun test4() = check(listOf<Any>())
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Functional+Programming+%2F+Manipulating+Lists+%2F+Exercise2
+status: Unchecked
+record: -1

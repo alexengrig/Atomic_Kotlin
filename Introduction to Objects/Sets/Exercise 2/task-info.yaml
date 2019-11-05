@@ -1,0 +1,74 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 87
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 87
+    initialized_from_dependency: false
+    possible_answer: return s.toSet().size == s.length
+    selected: false
+    status: Unchecked
+  text: |-
+    package sets2
+
+    import atomictest.eq
+
+    fun hasUniqueCharacters(s: String): Boolean {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        hasUniqueCharacters("abcd") eq true
+        hasUniqueCharacters("abcb") eq false
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package sets2
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestUniqueCharacters {
+        private fun checkUniqueCharacters(s: String, isUnique: Boolean) {
+            val message = if (isUnique) {
+                "This string $s has unique characters"
+            }
+            else {
+                "This string $s has not unique characters"
+            }
+            Assert.assertEquals(message, isUnique, hasUniqueCharacters(s))
+        }
+
+        @Test
+        fun test1OneCharacter() = checkUniqueCharacters("a", true)
+
+        @Test
+        fun test2TwoCharacters() = checkUniqueCharacters("aa", false)
+
+        @Test
+        fun test3Sample() = checkUniqueCharacters("abcd", true)
+
+        @Test
+        fun test4Sample() = checkUniqueCharacters("abcb", false)
+
+        @Test
+        fun test5Alphabet() = checkUniqueCharacters(('a'..'z').joinToString(""), true)
+
+        @Test
+        fun test6Comma() = checkUniqueCharacters(('a'..'c').joinToString(), false)
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Introduction+to+Objects+%2F+Sets+%2F+Exercise2
+status: Unchecked
+record: -1

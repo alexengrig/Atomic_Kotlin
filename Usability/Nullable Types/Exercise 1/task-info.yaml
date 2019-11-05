@@ -1,0 +1,79 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 565
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 565
+    initialized_from_dependency: false
+    possible_answer: hamsters[name]
+    selected: false
+    status: Unchecked
+  text: |-
+    package nullableTypes1
+
+    import atomictest.eq
+
+    class Hamster(val name: String) {
+        override fun toString(): String {
+            return "Hamster('$name')"
+        }
+    }
+
+    class Cage(private val maxCapacity: Int) {
+        private val hamsters: MutableMap<String, Hamster> =
+                mutableMapOf()
+
+        fun put(hamster: Hamster): Boolean =
+                if (hamsters.size == maxCapacity)
+                    false
+                else {
+                    hamsters[hamster.name] = hamster
+                    true
+                }
+
+        fun takeHamsterByName(name: String): Hamster? =
+                TODO()
+    }
+
+    fun main(args: Array<String>) {
+        val cage = Cage(1)
+        cage.takeHamsterByName("Alice") eq null
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package nullableTypes1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestHamstersAndNullableTypes {
+        @Test
+        fun test1SampleSuccess() {
+            val cage = Cage(1)
+            cage.put(Hamster("Alice"))
+            Assert.assertEquals("'takeHamsterByName' should return a hamster with a given name",
+                    "Hamster('Alice')", cage.takeHamsterByName("Alice").toString())
+        }
+
+        @Test
+        fun test2SampleNoHamster() {
+            val cage = Cage(1)
+            Assert.assertNull("Expected null when cage doesn't contain a hamster with a given name:",
+                    cage.takeHamsterByName("Alice"))
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Usability+%2F+Nullable+Types+%2F+Exercise1
+status: Unchecked
+record: -1

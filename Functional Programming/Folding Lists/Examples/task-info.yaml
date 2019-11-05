@@ -1,0 +1,77 @@
+type: theory
+files:
+- name: src/SumViaFold.kt
+  visible: true
+  text: |-
+    // FoldingLists/SumViaFold.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val list = listOf(1, 10, 100, 1000)
+      list.fold(0) {
+        sum, n -> sum + n
+      } eq 1111
+    }
+  learner_created: false
+- name: src/FoldVsForLoop.kt
+  visible: true
+  text: |-
+    // FoldingLists/FoldVsForLoop.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val list = listOf(1, 10, 100, 1000)
+
+      val initial = 0
+      val operation =
+        { sum: Int, i: Int -> sum + i }
+
+      val s = list.fold(initial) {
+        sum, i -> operation(sum, i)
+      }
+      s eq 1111
+
+      var accumulator = initial
+      for (i in list) {
+        accumulator = operation(accumulator, i)
+      }
+      accumulator eq 1111
+    }
+  learner_created: false
+- name: src/FoldRight.kt
+  visible: true
+  text: |-
+    // FoldingLists/FoldRight.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val list = listOf('a', 'b', 'c', 'd')
+
+      list.fold("*") {
+        accumulator, element ->
+        "($accumulator) + $element"
+      } eq "((((*) + a) + b) + c) + d"
+
+      list.foldRight("*") {
+        element, accumulator ->
+        "$element + ($accumulator)"
+      } eq "a + (b + (c + (d + (*))))"
+    }
+  learner_created: false
+- name: src/FoldAndReduce.kt
+  visible: true
+  text: |-
+    // FoldingLists/FoldAndReduce.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val list = listOf(1, 2, 3, 4)
+      list.fold(1) { acc, elem -> acc * elem } eq
+        1 * 1 * 2 * 3 * 4
+
+      list.reduce { acc, elem -> acc * elem } eq
+        1 * 2 * 3 * 4
+    }
+  learner_created: false
+status: Unchecked
+record: -1

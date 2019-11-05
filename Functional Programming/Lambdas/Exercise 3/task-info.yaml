@@ -1,0 +1,71 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 172
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 172
+    initialized_from_dependency: false
+    possible_answer: return names.mapIndexed { index, name -> Student(startId + index,
+      name) }
+    selected: false
+    status: Unchecked
+  text: |-
+    package lambdas3
+
+    import atomictest.eq
+
+    data class Student(val id: Int, val name: String)
+
+    fun registerStudents(names: List<String>, startId: Int = 0): List<Student> {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        val students = listOf("Alice", "Bob")
+        registerStudents(students) eq
+                listOf(Student(0, "Alice"), Student(1, "Bob"))
+
+        registerStudents(students, startId = 10) eq
+                listOf(Student(10, "Alice"), Student(11, "Bob"))
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package lambdas3
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestRegisterStudents {
+        private fun checkRegisterStudents(names: List<String>, startId: Int) {
+            Assert.assertEquals("Wrong result for startId = $startId, names = $names:",
+                    names.mapIndexed { index, name -> Student(index + startId, name) },
+                    registerStudents(names, startId))
+        }
+
+        @Test
+        fun test1Sample() = checkRegisterStudents(listOf("Alice", "Bob"), 0)
+
+        @Test
+        fun test2Sample() = checkRegisterStudents(listOf("Alice", "Bob"), 10)
+
+        @Test
+        fun test3() = checkRegisterStudents(listOf("Alice", "Bob", "Charlie"), 1000)
+
+        @Test
+        fun test4() = checkRegisterStudents(listOf(), 0)
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Functional+Programming+%2F+Lambdas+%2F+Exercise3
+status: Unchecked
+record: -1

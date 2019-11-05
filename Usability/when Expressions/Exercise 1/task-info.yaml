@@ -1,0 +1,95 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 130
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 130
+    initialized_from_dependency: false
+    possible_answer: |2-
+
+              when (cloudiness) {
+                  in 81..100 -> "Sunny"
+                  in 61..80 -> "Mostly Sunny"
+                  in 41..60 -> "Partly Sunny"
+                  in 21..40 -> "Mostly Cloudy"
+                  in 0..20 -> "Cloudy"
+                  else -> throw IllegalArgumentException(
+                          "Cloudiness value should be between 0 and 100")
+              }
+    selected: false
+    status: Unchecked
+  text: |-
+    package whenExpressions1
+
+    import atomictest.capture
+    import atomictest.eq
+
+    fun getCloudinessDescription(cloudiness: Int): String = TODO()
+
+    fun main(args: Array<String>) {
+        getCloudinessDescription(100) eq "Sunny"
+        getCloudinessDescription(70) eq "Mostly Sunny"
+        getCloudinessDescription(50) eq "Partly Sunny"
+        getCloudinessDescription(30) eq "Mostly Cloudy"
+        getCloudinessDescription(0) eq "Cloudy"
+        capture {
+            getCloudinessDescription(1000)
+        } eq "IllegalArgumentException: Cloudiness value should be between 0 and 100"
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package whenExpressions1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestCloudiness {
+        private fun expected(cloudiness: Int): String =
+                when (cloudiness) {
+                    in 81..100 -> "Sunny"
+                    in 61..80 -> "Mostly Sunny"
+                    in 41..60 -> "Partly Sunny"
+                    in 21..40 -> "Mostly Cloudy"
+                    in 0..20 -> "Cloudy"
+                    else -> throw IllegalArgumentException(
+                            "Cloudiness value should be between 0 and 100")
+                }
+
+        @Test
+        fun test1CorrectValues() {
+            for (cloudiness in 0..100) {
+                Assert.assertEquals("Wrong result for cloudiness=$cloudiness:",
+                        expected(cloudiness), getCloudinessDescription(cloudiness))
+            }
+        }
+
+        private fun testIncorrectValue(cloudiness: Int) {
+            try {
+                getCloudinessDescription(cloudiness)
+                throw AssertionError("Expected an IllegalArgumentException for cloudiness=$cloudiness")
+            } catch (exception: IllegalArgumentException) {
+                Assert.assertEquals("Incorrect error message", "Cloudiness value should be between 0 and 100", exception.message)
+            }
+        }
+
+        @Test
+        fun test2Incorrect() = testIncorrectValue(104)
+
+        @Test
+        fun test3Incorrect() = testIncorrectValue(-3)
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Usability+%2F+when+Expressions+%2F+Exercise1
+status: Unchecked
+record: -1

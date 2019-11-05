@@ -1,0 +1,98 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 76
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 76
+    initialized_from_dependency: false
+    possible_answer: |-
+      var occurrences = 0
+          for (e in list) {
+              if (number == e) {
+                  occurrences++
+              }
+          }
+          return occurrences
+    selected: false
+    status: Unchecked
+  text: |-
+    package lists2
+
+    fun countOccurrences(list: IntList, number: Int): Int {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        val list = IntList(listOf(1, 2, 3, 2))
+        println(countOccurrences(list, 2))  // 2
+    }
+  learner_created: false
+- name: src/IntList.kt
+  visible: true
+  text: |-
+    package lists2
+
+    class IntList(private val list: List<Int>) : Iterable<Int> {
+
+        override fun iterator(): Iterator<Int> = list.iterator()
+
+        operator fun get(index: Int): Int = list[index]
+
+        override fun toString() = list.toString()
+
+        fun size() = list.size
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package lists2
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestCountOccurrences {
+
+        private fun checkOccurrences(list: List<Int>, number: Int, result: Int) {
+            val intList = IntList(list)
+            Assert.assertEquals("Incorrect maximum for $intList", result, countOccurrences(intList, number))
+        }
+
+        @Test
+        fun test1OneElement() {
+            checkOccurrences(listOf(1), 1, 1)
+        }
+
+        @Test
+        fun test2TwoElements() {
+            checkOccurrences(listOf(1, 1), 1, 2)
+        }
+
+        @Test
+        fun test3EmptyList() {
+            checkOccurrences(listOf(), 1, 0)
+        }
+
+        @Test
+        fun test4SeveralElements() {
+            checkOccurrences(listOf(6, 2, 7, 7, 19, 7, 21), 7, 3)
+        }
+
+        @Test
+        fun test5OnlyElements() {
+            checkOccurrences(listOf(7, 7, 7, 7, 7, 7, 7), 7, 7)
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Introduction+to+Objects+%2F+Lists+%2F+Exercise2
+status: Unchecked
+record: -1

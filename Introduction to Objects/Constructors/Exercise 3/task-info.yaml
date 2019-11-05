@@ -1,0 +1,46 @@
+type: ide
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 91
+    length: 8
+    placeholder_text: /*TODO*/
+    initial_state:
+      length: 8
+      offset: 91
+    initialized_from_dependency: false
+    possible_answer: |-
+      override fun toString(): String {
+              return "Human(name='$name', age=$age)"
+          }
+    selected: false
+    status: Unchecked
+  text: |-
+    package constructors3
+
+    class Human(
+            val name: String,
+            val age: Int
+    ) {
+        /*TODO*/
+    }
+
+    fun main(args: Array<String>) {
+        val human = Human("Rick", 70)
+        println(human)
+    }
+    /* Expected output:
+    Human(name='Rick', age=70)
+    */
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |+
+    package constructors3
+
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Introduction+to+Objects+%2F+Constructors+%2F+Exercise3
+status: Unchecked
+record: -1

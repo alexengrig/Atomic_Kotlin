@@ -1,0 +1,83 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 78
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 78
+    initialized_from_dependency: false
+    possible_answer: this % 2 == 1
+    selected: false
+    status: Unchecked
+  - offset: 113
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 113
+    initialized_from_dependency: false
+    possible_answer: '!isOdd()'
+    selected: false
+    status: Unchecked
+  text: |-
+    package extensionFunctions2
+
+    import atomictest.eq
+
+    fun Int.isOdd(): Boolean = TODO()
+    fun Int.isEven(): Boolean = TODO()
+
+    fun main(args: Array<String>) {
+        1.isOdd() eq true
+        2.isEven() eq true
+        13.isEven() eq false
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package extensionFunctions2
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestOddEven {
+        private fun checkQuality(
+                number: Int,
+                message: String,
+                function: Function1<Int, Boolean>,
+                check: Boolean
+        ) {
+            Assert.assertEquals("$number should${if (check) "" else "n't"} be $message:", check, function(number))
+        }
+
+        @Test
+        fun test1Sample() = checkQuality(1, "odd", Int::isOdd, true)
+
+        @Test
+        fun test2Sample() = checkQuality(2, "even", Int::isEven, true)
+
+        @Test
+        fun test3Sample() = checkQuality(13, "even", Int::isEven, false)
+
+        @Test
+        fun test4() = checkQuality(14, "odd", Int::isOdd, false)
+
+        @Test
+        fun test5() = checkQuality(12897, "even", Int::isEven, false)
+
+        @Test
+        fun test6() = checkQuality(12897, "odd", Int::isOdd, true)
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Usability+%2F+Extension+Functions+%2F+Exercise2
+status: Unchecked
+record: -1

@@ -1,0 +1,243 @@
+type: theory
+files:
+- name: src/NullableReceiver.kt
+  visible: true
+  text: |-
+    // LibraryHelpers/NullableReceiver.kt
+    package libraryhelpers
+
+    data class Window(  // Makes it displayable
+      val id: String = "none",
+      var x: Int = 0,   // Horizontal location
+      var y: Int = 0,   // Vertical Location
+      var w: Int = 200, // Width
+      var h: Int = 100  // Height
+    )
+
+    fun adjustWindowIfNotNull(window: Window?) {
+      window?.run {          // [1]
+        this.x = 10          // [2]
+        y = 10
+        w *= 2
+        h *= 2
+        println(this)
+      }
+    }
+
+    fun main(args: Array<String>) {
+      val windowOrNull: Window? = null
+      // Nothing happens:
+      adjustWindowIfNotNull(windowOrNull)
+    }
+  learner_created: false
+- name: src/ResultOfWith.kt
+  visible: true
+  text: |-
+    // LibraryHelpers/ResultOfWith.kt
+    package libraryhelpers
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val mutableList = mutableListOf<Int>()
+      val result = with(mutableList) {
+        add(17)
+        add(42)
+        remove(0)
+      }
+      result eq false
+      mutableList eq listOf(17, 42)
+    }
+  learner_created: false
+- name: src/ResultOfApply.kt
+  visible: true
+  text: |-
+    // LibraryHelpers/ResultOfApply.kt
+    package libraryhelpers
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val mutableList = mutableListOf<Int>()
+      val result = mutableList.apply {
+        add(17)
+        add(42)
+        remove(0)
+      }
+      result eq listOf(17, 42)
+      mutableList eq listOf(17, 42)
+    }
+  learner_created: false
+- name: src/ApplyIfNotNull.kt
+  visible: true
+  text: |-
+    // LibraryHelpers/ApplyIfNotNull.kt
+    package libraryhelpers
+    import atomictest.eq
+
+    fun showMainWindow(
+      windowById: Map<String, Window>
+    ) {
+      val mainWindow =
+        windowById["main"]?.apply {
+          x = 10
+          y = 10
+          w *= 2
+          h *= 2
+        } ?: return                 // [1]
+      showWindow(mainWindow)
+    }
+
+    fun showWindow(window: Window) {
+      // ...
+      println("Showing ${window.id} window...")
+      println(window)
+    }
+
+    fun main(args: Array<String>) {
+      val mainWindow = Window("main")
+      showMainWindow(mapOf("main" to mainWindow))
+      mainWindow.x eq 10
+      val noneWindow = Window()
+      showMainWindow(mapOf("none" to noneWindow))
+      noneWindow.x eq 0
+    }
+    /* Output:
+    Showing main window...
+    Window(id=main, x=10, y=10, w=400, h=200)
+    10
+    0
+    */
+  learner_created: false
+- name: src/Also.kt
+  visible: true
+  text: |-
+    // LibraryHelpers/Also.kt
+    package libraryhelpers
+
+    fun showAdjustedWindow(window: Window) {
+      window.apply {
+        x = 7
+        y = 9
+        w *= 3
+        h *= 4
+      }.also {                   // [1]
+        showWindow(it)
+      }
+    }
+
+    fun main(args: Array<String>) {
+      val w = Window()
+      println(w)
+      showAdjustedWindow(w)
+    }
+    /* Output:
+    Window(id=none, x=0, y=0, w=200, h=100)
+    Showing none window...
+    Window(id=none, x=7, y=9, w=600, h=400)
+    */
+  learner_created: false
+- name: src/ApplyVsAlso.kt
+  visible: true
+  text: |-
+    // LibraryHelpers/ApplyVsAlso.kt
+    package libraryhelpers
+    import atomictest.eq
+
+    fun Window.dup() =
+      Window("dup of $id").also {
+        it.x = this.x               // [1]
+        it.y = this.y
+        it.w = this.w
+        it.h = this.h
+      }
+
+    fun Window.dup2() =
+      Window("dup of $id").also { win ->
+        win.x = this.x
+        win.y = this.y
+        win.w = this.w
+        win.h = this.h
+      }
+
+    fun main(args: Array<String>) {
+      val first = Window("first").apply {
+        w = 500
+        h = 100
+      }
+      val second = first.dup()
+      second.id eq "dup of first"
+      second.w eq 500
+      second.h eq 100
+      val third = second.dup()
+      third.id eq "dup of dup of first"
+      third.w eq 500
+      third.h eq 100
+    }
+  learner_created: false
+- name: src/CheckingArgument.kt
+  visible: true
+  text: |-
+    // LibraryHelpers/CheckingArgument.kt
+    package libraryhelpers
+
+    fun showGreetingWindow(
+      windowById: Map<String, Window>
+    ) {
+      val greetingWindow = windowById["greeting"]
+      // Check for null using if:
+      if (greetingWindow != null) {
+        showWindow(greetingWindow)
+      }
+      // Check for null using let():
+      greetingWindow?.let {
+        showWindow(it)
+      }
+      // Explicit lambda argument:
+      greetingWindow?.let { win ->
+        showWindow(win)
+      }
+    }
+
+    fun main(args: Array<String>) {
+      showGreetingWindow(mapOf(
+        "greeting" to Window("greeting")))
+      println("no Window:")
+      showGreetingWindow(mapOf())
+    }
+    /* Output:
+    Showing greeting window...
+    Window(id=greeting, x=0, y=0, w=200, h=100)
+    Showing greeting window...
+    Window(id=greeting, x=0, y=0, w=200, h=100)
+    Showing greeting window...
+    Window(id=greeting, x=0, y=0, w=200, h=100)
+    no Window:
+    */
+  learner_created: false
+- name: src/Let.kt
+  visible: true
+  text: |-
+    // LibraryHelpers/Let.kt
+    package libraryhelpers
+
+    fun showGreetingWindow2(
+      windowById: Map<String, Window>
+    ) {
+      windowById["greeting"]?.let {
+        showWindow(it)
+      }
+    }
+
+    fun main(args: Array<String>) {
+      showGreetingWindow2(mapOf(
+        "greeting" to Window("greeting")))
+      println("no Window:")
+      showGreetingWindow2(mapOf())
+    }
+    /* Output:
+    Showing greeting window...
+    Window(id=greeting, x=0, y=0, w=200, h=100)
+    no Window:
+    */
+  learner_created: false
+status: Unchecked
+record: -1

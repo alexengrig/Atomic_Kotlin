@@ -1,0 +1,52 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 55
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 55
+    initialized_from_dependency: false
+    possible_answer: |-
+      var s = ""
+          for (c in 'a'..'z') {
+              s += c
+          }
+          return s
+    selected: false
+    status: Unchecked
+  text: |-
+    package theinKeyword1
+
+    fun getAlphabet(): String {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        println(getAlphabet())  // abcdefghijklmnopqrstuvwxyz
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package theinKeyword1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestAlphabet {
+        @Test fun test1() {
+            Assert.assertEquals("abcdefghijklmnopqrstuvwxyz", getAlphabet())
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Programming+Basics+%2F+The+in+Keyword+%2F+Exercise1
+status: Unchecked
+record: -1

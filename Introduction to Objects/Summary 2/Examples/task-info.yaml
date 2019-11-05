@@ -1,0 +1,569 @@
+type: theory
+files:
+- name: src/ALibrary.kt
+  visible: true
+  text: |-
+    // Summary2/ALibrary.kt
+    package com.yoururl.libraryname
+
+    // Components to reuse ...
+    fun f() = "result"
+  learner_created: false
+- name: src/UseALibrary.kt
+  visible: true
+  text: |-
+    // Summary2/UseALibrary.kt
+    import com.yoururl.libraryname.*
+
+    fun main(args: Array<String>) {
+      val x = f()
+    }
+  learner_created: false
+- name: src/UsingAtomicTest.kt
+  visible: true
+  text: |-
+    // Summary2/UsingAtomicTest.kt
+    import atomictest.*
+
+    fun main(args: Array<String>) {
+      val pi = 3.14
+      val pie = "A round dessert"
+      pi eq 3.14
+      pie eq "A round dessert"
+      pi neq pie
+    }
+  learner_created: false
+- name: src/ListCollection.kt
+  visible: true
+  text: |-
+    // Summary2/ListCollection.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val lst = listOf(19.2, 88.3, 22.1)
+      lst[1] eq 88.3  // Indexing
+      lst.reversed() eq listOf(22.1, 88.3, 19.2)
+      lst.sorted() eq listOf(19.2, 22.1, 88.3)
+      lst.max() eq 88.3
+      lst.min() eq 19.2
+      lst.sum() eq 129.6
+    }
+  learner_created: false
+- name: src/ClassBodies.kt
+  visible: true
+  text: |-
+    // Summary2/ClassBodies.kt
+
+    class NoBody
+
+    class SomeBody {
+      val name = "Janet Doe"
+    }
+
+    class EveryBody {
+      val all = listOf(SomeBody(),
+        SomeBody(), SomeBody())
+    }
+
+    fun main(args: Array<String>) {
+      val nb = NoBody()
+      val sb = SomeBody()
+      val eb = EveryBody()
+    }
+  learner_created: false
+- name: src/Temperature.kt
+  visible: true
+  text: |-
+    // Summary2/Temperature.kt
+    import atomictest.eq
+
+    class Temperature {
+      var current = 0.0
+      var scale = "f"
+      fun setFahrenheit(now: Double) {
+        current = now
+        scale = "f"
+      }
+      fun setCelsius(now: Double) {
+        current = now
+        scale = "c"
+      }
+      fun getFahrenheit(): Double =
+        if (scale == "f")
+          current
+        else
+          current * 9.0 / 5.0 + 32.0
+      fun getCelsius(): Double =
+        if (scale == "c")
+          current
+        else
+          (current - 32.0) * 5.0 / 9.0
+    }
+
+    fun main(args: Array<String>) {
+      val temp = Temperature()     // [1]
+      temp.setFahrenheit(98.6)
+      temp.getFahrenheit() eq 98.6
+      temp.getCelsius() eq 37.0
+      temp.setCelsius(100.0)
+      temp.getFahrenheit() eq 212.0
+    }
+  learner_created: false
+- name: src/TicTacToe.kt
+  visible: true
+  text: |-
+    // Summary2/TicTacToe.kt
+    import atomictest.eq
+
+    class Cell {
+      var entry = ' '                   // [1]
+      fun setValue(e: Char): String =   // [2]
+        if (entry == ' ' &&
+          (e == 'X' || e == 'O')) {
+          entry = e
+          "successful move"
+        } else
+          "invalid move"
+    }
+
+    class Grid {
+      val cells = listOf(
+        listOf(Cell(), Cell(), Cell()),
+        listOf(Cell(), Cell(), Cell()),
+        listOf(Cell(), Cell(), Cell())
+      )
+      fun play(e: Char, x: Int, y: Int): String =
+        if (x !in 0..2 || y !in 0..2)
+          "invalid move"
+        else
+          cells[x][y].setValue(e)       // [3]
+    }
+
+    fun main(args: Array<String>) {
+      val grid = Grid()
+      grid.play('X', 1, 1) eq "successful move"
+      grid.play('X', 1, 1) eq "invalid move"
+      grid.play('O', 1, 3) eq "invalid move"
+    }
+  learner_created: false
+- name: src/WildAnimals.kt
+  visible: true
+  text: |-
+    // Summary2/WildAnimals.kt
+    import atomictest.eq
+
+    class Badger(id: String, years: Int) {
+      val name = id
+      val age = years
+      override fun toString(): String {
+        return "Badger: $name, age: $age"
+      }
+    }
+
+    class Snake(
+      var type: String,
+      var length: Double
+    ) {
+      override fun toString(): String {
+        return "Snake: $type, length: $length"
+      }
+    }
+
+    class Moose(
+      val age: Int,
+      val height: Double
+    ) {
+      override fun toString(): String {
+        return "Moose, age: $age, height: $height"
+      }
+    }
+
+    fun main(args: Array<String>) {
+      Badger("Bob", 11) eq "Badger: Bob, age: 11"
+      Snake("Garden", 2.4) eq
+        "Snake: Garden, length: 2.4"
+      Moose(16, 7.2) eq
+        "Moose, age: 16, height: 7.2"
+    }
+  learner_created: false
+- name: src/Boxes.kt
+  visible: true
+  text: |-
+    // Summary2/Boxes.kt
+
+    private var count = 0                   // [1]
+
+    private class Box(val dimension: Int) { // [2]
+      fun volume() =
+        dimension * dimension * dimension
+      override fun toString() =
+        "Box volume: ${volume()}"
+    }
+
+    private fun countBox(box: Box) {        // [3]
+      println("$box")
+      count++
+    }
+
+    fun countBoxes() {
+      countBox(Box(4))
+      countBox(Box(5))
+    }
+
+    fun main(args: Array<String>) {
+      countBoxes()
+      println("$count boxes")
+    }
+    /* Output:
+    Box volume: 64
+    Box volume: 125
+    2 boxes
+    */
+  learner_created: false
+- name: src/JetPack.kt
+  visible: true
+  text: |-
+    // Summary2/JetPack.kt
+
+    class JetPack(
+      private var fuel: Double     // [1]
+    ) {
+      private var warning = false
+      private fun burn() =         // [2]
+        if (fuel - 1 <= 0) {
+          fuel = 0.0
+          warning = true
+        } else
+          fuel -= 1
+      public fun fly() = burn()    // [3]
+      fun check() =                // [4]
+        if (warning)               // [5]
+          "Warning"
+        else
+          "OK"
+    }
+
+    fun main(args: Array<String>) {
+      val jetPack = JetPack(3.0)
+      while(jetPack.check() != "Warning") {
+        println(jetPack.check())
+        jetPack.fly()
+      }
+      println(jetPack.check())
+    }
+    /* Output:
+    OK
+    OK
+    OK
+    Warning
+    */
+  learner_created: false
+- name: src/ToDoubleException.kt
+  visible: true
+  text: |-
+    // Summary2/ToDoubleException.kt
+
+    fun main(args: Array<String>) {
+      // val i = "$1.9".toDouble()
+    }
+  learner_created: false
+- name: src/AtomicTestCapture.kt
+  visible: true
+  text: |-
+    // Summary2/AtomicTestCapture.kt
+    import atomictest.*
+
+    fun main(args: Array<String>) {
+      capture {
+        "$1.9".toDouble()
+      } eq "NumberFormatException: " +
+        """For input string: "$1.9""""
+    }
+  learner_created: false
+- name: src/Quadratic.kt
+  visible: true
+  text: |-
+    // Summary2/Quadratic.kt
+    import kotlin.math.sqrt
+    import atomictest.*
+
+    class Roots(
+      val root1: Double,
+      val root2: Double
+    )
+
+    fun quadraticZeroes(
+      a: Double,
+      b: Double,
+      c: Double
+    ): Roots {
+      if (a == 0.0)
+        throw IllegalArgumentException(
+          "a is zero")
+      val underRadical = b * b - 4 * a * c
+      if (underRadical < 0)
+        throw IllegalArgumentException(
+          "underRadical is negative")
+      val squareRoot = sqrt(underRadical)
+      val root1 = (-b - squareRoot) / 2 * a
+      val root2 = (-b + squareRoot) / 2 * a
+      return Roots(root1, root2)
+    }
+
+    fun main(args: Array<String>) {
+      capture {
+        quadraticZeroes(0.0, 4.0, 5.0)
+      } eq "IllegalArgumentException: " +
+        "a is zero"
+      capture {
+        quadraticZeroes(3.0, 4.0, 5.0)
+      } eq "IllegalArgumentException: " +
+        "underRadical is negative"
+      val roots = quadraticZeroes(3.0, 8.0, 5.0)
+      roots.root1 eq -15.0
+      roots.root2 eq -9.0
+    }
+  learner_created: false
+- name: src/MustableVsReadonlyList.kt
+  visible: true
+  text: |-
+    // Summary2/MustableVsReadonlyList.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val ints = listOf(5, 13, 9)
+      // ints.add(11) // 'add()' not available
+      for (i in ints)
+        if(i > 10)
+          println(i)
+
+      val chars = mutableListOf('a', 'b', 'c')
+      chars.add('d') // 'add()' available
+      chars += 'e'
+      println(chars)
+    }
+    /* Output:
+    13
+    [a, b, c, d, e]
+    */
+  learner_created: false
+- name: src/MultipleListReferences.kt
+  visible: true
+  text: |-
+    // Summary2/MultipleListReferences.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val first = mutableListOf(1)
+      val second: List<Int> = first
+      second eq listOf(1)
+
+      first += 2
+      // second sees the change:
+      second eq listOf(1, 2)
+    }
+  learner_created: false
+- name: src/ListOfStrings.kt
+  visible: true
+  text: |-
+    // Summary2/ListOfStrings.kt
+
+    fun main(args: Array<String>) {
+      val jabber = """
+        Twas brillig, and the slithy toves
+          Did gyre and gimble in the wabe:
+        All mimsy were the borogoves,
+          And the mome raths outgrabe.
+      """.trim().split(Regex("\\W+"))
+
+      println(jabber.take(5))
+      println(jabber.slice(6..12))
+      println(jabber.slice(6..18 step 2))
+      println(jabber.sorted().takeLast(5))
+      println(
+        jabber.sorted().distinct().takeLast(5))
+    }
+    /* Output:
+    [Twas, brillig, and, the, slithy]
+    [Did, gyre, and, gimble, in, the, wabe]
+    [Did, and, in, wabe, mimsy, the, And]
+    [the, the, toves, wabe, were]
+    [slithy, the, toves, wabe, were]
+    */
+  learner_created: false
+- name: src/ExplicitTyping.kt
+  visible: true
+  text: |-
+    // Summary2/ExplicitTyping.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val numbers: List<Int> = listOf(1, 2, 3)
+      val strings: List<String> =
+        listOf("one", "two", "three")
+      numbers eq "[1, 2, 3]"
+      strings eq "[one, two, three]"
+      toCharList("seven") eq "[s, e, v, e, n]"
+    }
+
+    fun toCharList(s: String): List<Char> =
+      s.toList()
+  learner_created: false
+- name: src/VarArgs.kt
+  visible: true
+  text: |-
+    // Summary2/VarArgs.kt
+
+    fun varargs(s: String, vararg ints: Int) {
+      for(i in ints)
+        print("$i ")
+      println(s)
+    }
+
+    fun main(args: Array<String>) {
+      varargs("primes", 5, 7, 11, 13, 17, 19, 23)
+    }
+    /* Output:
+    5 7 11 13 17 19 23 primes
+    */
+  learner_created: false
+- name: src/ArraySpread.kt
+  visible: true
+  text: |-
+    // Summary2/ArraySpread.kt
+
+    fun main(args: Array<String>) {
+      val array = intArrayOf(4, 5)
+      varargs("x", 1, 2, 3, *array, 6)  // [1]
+      val list = listOf(9, 10, 11)
+      varargs(
+        "y", 7, 8, *list.toIntArray())  // [2]
+    }
+    /* Output:
+    1 2 3 4 5 6 x
+    7 8 9 10 11 y
+    */
+  learner_created: false
+- name: src/ColorSet.kt
+  visible: true
+  text: |-
+    // Summary2/ColorSet.kt
+    import atomictest.eq
+
+    val colors =
+      "Yellow Green Green Blue"
+        .split(Regex("""\W+""")).sorted()  // [1]
+
+    fun main(args: Array<String>) {
+      colors eq
+        listOf("Blue", "Green", "Green", "Yellow")
+
+      val colorSet = colors.toSet()        // [2]
+      colorSet eq
+        setOf("Yellow", "Green", "Blue")
+
+      (colorSet + colorSet) eq colorSet    // [3]
+
+      val mSet = colorSet.toMutableSet()   // [4]
+      mSet -= "Blue"
+      mSet += "Red"                        // [5]
+      mSet eq
+        setOf("Yellow", "Green", "Red")
+
+      // Set membership:
+      ("Green" in colorSet) eq true        // [6]
+      colorSet.contains("Red") eq false
+    }
+  learner_created: false
+- name: src/ASCIIMap.kt
+  visible: true
+  text: |-
+    // Summary2/ASCIIMap.kt
+
+    fun main(args: Array<String>) {
+      val ascii = mapOf(
+        "A" to 65,
+        "B" to 66,
+        "C" to 67,
+        "D" to 68,
+        "I" to 73,
+        "J" to 74,
+        "K" to 75
+      )
+      println(ascii)
+      println(ascii["B"])                 // [1]
+      println(ascii.keys)
+      println(ascii.values)
+      for (entry in ascii)                // [2]
+        print("${entry.key}:${entry.value},")
+      println()
+      for ((key, value) in ascii)         // [3]
+        print("$key:$value,")
+      println()
+      val mutable = ascii.toMutableMap()  // [4]
+      mutable.remove("I")
+      println(mutable)
+      mutable.put("Z", 90)
+      println(mutable)
+      mutable.clear()
+      mutable["A"] = 100
+      println(mutable)
+    }
+    /* Output:
+    {A=65, B=66, C=67, D=68, I=73, J=74, K=75}
+    66
+    [A, B, C, D, I, J, K]
+    [65, 66, 67, 68, 73, 74, 75]
+    A:65,B:66,C:67,D:68,I:73,J:74,K:75,
+    A:65,B:66,C:67,D:68,I:73,J:74,K:75,
+    {A=65, B=66, C=67, D=68, J=74, K=75}
+    {A=65, B=66, C=67, D=68, J=74, K=75, Z=90}
+    {A=100}
+    */
+  learner_created: false
+- name: src/PropertyReadWrite.kt
+  visible: true
+  text: |-
+    // Summary2/PropertyReadWrite.kt
+    package summary2
+    import atomictest.eq
+
+    class Holder(var i: Int)
+
+    fun main(args: Array<String>) {
+      val holder = Holder(10)
+      holder.i eq 10 // Read the 'i' property
+      holder.i = 20  // Write to the 'i' property
+    }
+  learner_created: false
+- name: src/GettersAndSetter.kt
+  visible: true
+  text: |-
+    // Summary2/GettersAndSetter.kt
+    package summary2
+
+    class GettersAndSetter {
+      var i: Int = 0
+        get() {
+          println("get()")
+          return field
+        }
+        set(value) {
+          println("set($value)")
+          field = value
+        }
+    }
+
+    fun main(args: Array<String>) {
+      val gs = GettersAndSetter()
+      gs.i = 2
+      println(gs.i)
+    }
+    /* Output:
+    set(2)
+    get()
+    2
+    */
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,93 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 55
+    length: 43
+    placeholder_text: 'fun <T> List<T>.secondOrNull(): T? = TODO()'
+    initial_state:
+      length: 43
+      offset: 55
+    initialized_from_dependency: false
+    possible_answer: 'fun <T> List<T>.secondOrNull(): T? = getOrNull(1)'
+    selected: false
+    status: Unchecked
+  - offset: 100
+    length: 48
+    placeholder_text: 'fun <T> List<T>.penultimateOrNull(): T? = TODO()'
+    initial_state:
+      length: 48
+      offset: 100
+    initialized_from_dependency: false
+    possible_answer: 'fun <T> List<T>.penultimateOrNull(): T? = getOrNull(size - 2)'
+    selected: false
+    status: Unchecked
+  text: |-
+    package introductiontoGenerics1
+
+    import atomictest.eq
+
+    fun <T> List<T>.secondOrNull(): T? = TODO()
+
+    fun <T> List<T>.penultimateOrNull(): T? = TODO()
+
+    fun main(args: Array<String>) {
+        val ints = listOf(1, 2, 3)
+        ints.secondOrNull() eq 2
+        ints.penultimateOrNull() eq 2
+
+        val strings = listOf("a", "b", "c", "d")
+        strings.secondOrNull() eq "b"
+        strings.penultimateOrNull() eq "c"
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package introductiontoGenerics1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestSecond {
+        private fun <T> checkSecondFunctions(list: List<T>, second: T?, penultimate: T?) {
+            Assert.assertEquals("Wrong `second` element for $list:",
+                    list.secondOrNull(), second)
+            Assert.assertEquals("Wrong `penultimate` element for $list:",
+                    list.penultimateOrNull(), penultimate)
+        }
+
+        @Test
+        fun test1Sample() {
+            checkSecondFunctions(listOf(1, 2, 3), 2, 2)
+        }
+
+        @Test
+        fun test2Sample() {
+            checkSecondFunctions(listOf("a", "b", "c", "d"), "b", "c")
+        }
+
+        @Test
+        fun test3() {
+            checkSecondFunctions(listOf('a', 'b', 'c', 'd', 'e', 'f', 'x', 'y', 'z'), 'b', 'y')
+        }
+
+        @Test
+        fun test4OneElement() {
+            checkSecondFunctions(listOf(1), null, null)
+        }
+
+        @Test
+        fun test5Empty() {
+            checkSecondFunctions(listOf(), null, null)
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Usability+%2F+Introduction+to+Generics+%2F+Exercise1
+status: Unchecked
+record: -1

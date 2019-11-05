@@ -1,0 +1,34 @@
+type: output
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 57
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 57
+    initialized_from_dependency: false
+    possible_answer: |-
+      println("Hello,")
+          println("Kotlin!")
+    selected: false
+    status: Unchecked
+  text: |-
+    package helloWorld2
+
+    fun main(args: Array<String>) {
+        TODO()
+    }
+  learner_created: false
+- name: test/output.txt
+  visible: false
+  text: |
+    Hello,
+    Kotlin!
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Programming+Basics+%2F+Hello%2C+World%21+%2F+Exercise2
+status: Unchecked
+record: -1

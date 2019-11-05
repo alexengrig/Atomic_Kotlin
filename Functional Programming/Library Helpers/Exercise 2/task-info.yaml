@@ -1,0 +1,182 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 103
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 103
+    initialized_from_dependency: false
+    possible_answer: return receiver.block()
+    selected: false
+    status: Unchecked
+  - offset: 157
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 157
+    initialized_from_dependency: false
+    possible_answer: return block()
+    selected: false
+    status: Unchecked
+  - offset: 210
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 210
+    initialized_from_dependency: false
+    possible_answer: return block(this)
+    selected: false
+    status: Unchecked
+  - offset: 266
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 266
+    initialized_from_dependency: false
+    possible_answer: |-
+      block()
+          return this
+    selected: false
+    status: Unchecked
+  - offset: 320
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 320
+    initialized_from_dependency: false
+    possible_answer: |-
+      block(this)
+          return this
+    selected: false
+    status: Unchecked
+  text: |-
+    package libraryHelpers2
+
+    import atomictest.eq
+
+    fun <T, R> with(receiver: T, block: T.() -> R): R {
+        TODO()
+    }
+
+    fun <T, R> T.run(block: T.() -> R): R {
+        TODO()
+    }
+
+    fun <T, R> T.let(block: (T) -> R): R {
+        TODO()
+    }
+
+    fun <T> T.apply(block: T.() -> Unit): T {
+        TODO()
+    }
+
+    fun <T> T.also(block: (T) -> Unit): T {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        val sb = StringBuilder()
+        with (sb) {
+            append("0")
+        }
+        sb.toString() eq "0"
+
+        StringBuilder().run {
+            append("1")
+            toString()
+        } eq "1"
+
+        StringBuilder().let {
+            it.append("2")
+            it.toString()
+        } eq "2"
+
+        StringBuilder().apply {
+            append("3")
+        }.toString() eq "3"
+
+        StringBuilder().also {
+            it.append("4")
+        }.toString() eq "4"
+
+        class Rectangle(var width: Int = 0, var height: Int = 0)
+        val map = mapOf("square" to Rectangle())
+        val square = map["square"]?.apply {
+            width = 20
+            height = 20
+        }
+        square?.width eq 20
+        square?.height eq 20
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package libraryHelpers2
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestPersonsMap {
+        private fun check(actual: String, expected: String) {
+            Assert.assertEquals("Wrong result for sample",
+                    expected,
+                    actual)
+
+        }
+
+        @Test
+        fun test1Sample() {
+            val sb = StringBuilder()
+            with(sb) {
+                append("0")
+            }
+            check(sb.toString(), "0")
+
+        }
+        @Test
+        fun test2Sample() {
+            check(StringBuilder().run {
+                append("1")
+                toString()
+            }, "1")
+        }
+
+        @Test
+        fun test3Sample() {
+            check(StringBuilder().let {
+                it.append("2")
+                it.toString()
+            }, "2")
+        }
+
+        @Test
+        fun test4Sample() {
+            check(StringBuilder().apply {
+                append("3")
+            }.toString(), "3")
+        }
+
+        @Test
+        fun test5Sample() {
+            check(StringBuilder().also {
+                it.append("4")
+            }.toString(), "4")
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Functional+Programming+%2F+Library+Helpers+%2F+Exercise2
+status: Unchecked
+record: -1

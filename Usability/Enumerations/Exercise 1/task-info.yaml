@@ -1,0 +1,152 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 237
+    length: 10
+    placeholder_text: /* TODO */
+    initial_state:
+      length: 10
+      offset: 237
+    initialized_from_dependency: false
+    possible_answer: |2-
+       UP -> y -= steps
+                  DOWN -> y += steps
+                  LEFT -> x -= steps
+                  RIGHT -> x += steps
+    selected: false
+    status: Unchecked
+  text: |-
+    package enumerations1
+
+    import enumerations1.Direction.*
+
+    enum class Direction {
+        UP, DOWN, LEFT, RIGHT
+    }
+
+    class Robot {
+        var x = 0
+        var y = 0
+
+        fun go(direction: Direction, steps: Int) {
+            when (direction) {
+               /* TODO */
+            }
+        }
+
+        val location: String
+            get() = "($x,$y)"
+    }
+
+    fun main(args: Array<String>) {
+        val robot = Robot()
+        println(robot.location)
+        robot.go(RIGHT, 1)
+        println(robot.location)
+        robot.go(DOWN, 2)
+        println(robot.location)
+    }
+    /* Output:
+    (0,0)
+    (1,0)
+    (1,2)
+    */
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package enumerations1
+
+    import enumerations1.Direction.*
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestEnumerations {
+        class RobotHandler {
+            val robot: Robot = Robot()
+            val loggedMovements = StringBuilder()
+
+            fun goRight(steps: Int) {
+                robot.go(RIGHT, steps)
+                loggedMovements.appendln("goRight($steps)")
+            }
+
+            fun goLeft(steps: Int) {
+                robot.go(LEFT, steps)
+                loggedMovements.appendln("goLeft($steps)")
+
+            }
+
+            fun goDown(steps: Int) {
+                robot.go(DOWN, steps)
+                loggedMovements.appendln("goDown($steps)")
+
+            }
+
+            fun goUp(steps: Int) {
+                robot.go(UP, steps)
+                loggedMovements.appendln("goUp($steps)")
+            }
+        }
+
+        private fun testMovements(location: String, movements: RobotHandler.() -> Unit) {
+            val robotHandler = RobotHandler()
+            robotHandler.movements()
+            val actualLocation = robotHandler.robot.location
+            val message = if (robotHandler.loggedMovements.isEmpty()) {
+                "Initial location of the robot should be (0,0)"
+            } else {
+                "Wrong location after:\n" + robotHandler.loggedMovements
+            }
+            Assert.assertEquals(message, location, actualLocation)
+        }
+
+        @Test
+        fun testInitial() = testMovements("(0,0)") {}
+
+        @Test
+        fun testRight() = testMovements("(1,0)") {
+            goRight(1)
+        }
+
+        @Test
+        fun testLeft() = testMovements("(1,0)") {
+            goRight(2)
+            goLeft(1)
+        }
+
+        @Test
+        fun testDown() = testMovements("(0,1)") {
+            goDown(1)
+        }
+
+        @Test
+        fun testUp() = testMovements("(0,1)") {
+            goDown(2)
+            goUp(1)
+        }
+
+        @Test
+        fun testSeveralSteps() = testMovements("(3,5)") {
+            goRight(3)
+            goDown(5)
+        }
+
+        @Test
+        fun testSeveralSteps2() = testMovements("(10,10)") {
+            goRight(13)
+            goDown(15)
+            goUp(5)
+            goLeft(3)
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Usability+%2F+Enumerations+%2F+Exercise1
+status: Unchecked
+record: -1

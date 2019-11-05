@@ -1,0 +1,72 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 422
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 422
+    initialized_from_dependency: false
+    possible_answer: 2
+    selected: false
+    status: Unchecked
+  - offset: 454
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 454
+    initialized_from_dependency: false
+    possible_answer: 1
+    selected: false
+    status: Unchecked
+  text: |-
+    package dataClasses1
+
+    data class Contact(
+            val name: String,
+            val number: String
+    )
+
+    class Person(val name: String)
+
+    fun main(args: Array<String>) {
+        val set1 = setOf(Person("Alice"), Person("Alice"))
+        val set2 = setOf(Contact("Alice", "123-456"), Contact("Alice", "123-456"))
+        set1.size  // 1 or 2? Write you guess below.
+        set2.size  // 1 or 2? Write you guess below.
+    }
+
+    fun getSet1Size(): Int = TODO()
+    fun getSet2Size(): Int = TODO()
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package dataClasses1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestSetsSize {
+        @Test
+        fun testSizeOfFirstSet() {
+            Assert.assertTrue("Wrong answer for set1", getSet1Size() == 2)
+        }
+
+        @Test
+        fun testSizeOfSecondSet() {
+            Assert.assertTrue("Wrong answer for set2", getSet2Size() == 1)
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Usability+%2F+Data+Classes+%2F+Exercise1
+status: Unchecked
+record: -1

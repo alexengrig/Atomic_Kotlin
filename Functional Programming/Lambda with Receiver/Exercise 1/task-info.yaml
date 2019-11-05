@@ -1,0 +1,76 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 98
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 98
+    initialized_from_dependency: false
+    possible_answer: |-
+      repeat(width) {
+              appendln("*".repeat(width))
+          }
+    selected: false
+    status: Unchecked
+  text: |-
+    package lambdawithReceiver1
+
+    import atomictest.eq
+
+    fun drawSquare(width: Int) = buildString {
+        TODO()
+    }.trim()
+
+    fun main(args: Array<String>) {
+        drawSquare(3) eq
+                """|***
+                   |***
+                   |***""".trimMargin()
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package lambdawithReceiver1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestDrawSquare {
+      private fun check(width: Int) {
+        Assert.assertEquals("Wrong result for width = $width:",
+          buildString {
+            repeat(width) {
+              appendln("*".repeat(width))
+            }
+          }.trim(),
+          drawSquare(width))
+      }
+
+      @Test
+      fun test1Sample() = check(3)
+
+      @Test
+      fun test2() = check(0)
+
+      @Test
+      fun test3() = check(1)
+
+      @Test
+      fun test4() = check(5)
+
+      @Test
+      fun test5() = check(6)
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Functional+Programming+%2F+Lambda+with+Receiver+%2F+Exercise1
+status: Unchecked
+record: -1

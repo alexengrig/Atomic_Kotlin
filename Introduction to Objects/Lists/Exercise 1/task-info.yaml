@@ -1,0 +1,104 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 76
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 76
+    initialized_from_dependency: false
+    possible_answer: |-
+      var max = 0
+          for (e in list) {
+              if (max <= e) {
+                  max = e
+              }
+          }
+          return max
+    selected: false
+    status: Unchecked
+  text: |-
+    package lists1
+
+    import atomictest.eq
+
+    fun findMax(list: IntList): Int {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        val list = IntList(listOf(1, 2, 3, 2))
+        findMax(list) eq 3
+    }
+  learner_created: false
+- name: src/IntList.kt
+  visible: true
+  text: |-
+    package lists1
+
+    class IntList(private val list: List<Int>) : Iterable<Int> {
+
+        override fun iterator(): Iterator<Int> = list.iterator()
+
+        operator fun get(index: Int): Int = list[index]
+
+        override fun toString() = list.toString()
+
+        fun size() = list.size
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package lists1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestMaxInList {
+        private fun checkMaximum(list: List<Int>, max: Int) {
+            val intList = IntList(list)
+            Assert.assertEquals("Incorrect maximum for $intList", max, findMax(intList))
+        }
+
+        @Test
+        fun test1OneElement() {
+            checkMaximum(listOf(1), 1)
+        }
+
+        @Test
+        fun test2TwoElements() {
+            checkMaximum(listOf(1, 4), 4)
+        }
+
+        @Test
+        fun test3EmptyList() {
+            checkMaximum(listOf(), 0)
+        }
+
+        @Test
+        fun test4SeveralElements() {
+            checkMaximum(listOf(6, 2, 111, 7, 19, 21, 50), 111)
+        }
+
+        @Test
+        fun testFirstMax() {
+            checkMaximum(listOf(111, 6, 2, 7, 19, 21, 50), 111)
+        }
+
+        @Test
+        fun test5LastMax() {
+            checkMaximum(listOf(6, 2, 7, 19, 21, 50, 111), 111)
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Introduction+to+Objects+%2F+Lists+%2F+Exercise1
+status: Unchecked
+record: -1

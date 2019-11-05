@@ -1,0 +1,21 @@
+type: ide
+files:
+- name: src/Task.kt
+  visible: true
+  text: |-
+    package repetitionwithwhile4
+
+    fun getFooResult(): Int = 736
+
+    fun main(args: Array<String>) {
+        println("Foo result is: ${getFooResult()}")
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: package repetitionwithwhile4
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Programming+Basics+%2F+Repetition+with+while+%2F+Exercise4
+status: Unchecked
+record: -1

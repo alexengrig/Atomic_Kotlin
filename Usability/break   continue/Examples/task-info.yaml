@@ -1,0 +1,124 @@
+type: theory
+files:
+- name: src/ForControl.kt
+  visible: true
+  text: |-
+    // BreakAndContinue/ForControl.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val nums = mutableListOf(0)
+      for(i in 4 until 100 step 4) { // [2]
+        if (i == 8) continue         // [1]
+        if (i == 40) break           // [3]
+        nums.add(i)
+      }                              // [4]
+      nums eq
+      listOf(0,4,12,16,20,24,28,32,36)
+    }
+  learner_created: false
+- name: src/WhileControl.kt
+  visible: true
+  text: |-
+    // BreakAndContinue/WhileControl.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val nums = mutableListOf(0)
+      var i = 0
+      while(i < 100) {
+        i += 4
+        if (i == 8) continue
+        if (i == 40) break
+        nums.add(i)
+      }
+      nums eq
+      listOf(0,4,12,16,20,24,28,32,36)
+    }
+  learner_created: false
+- name: src/DoControl.kt
+  visible: true
+  text: |-
+    // BreakAndContinue/DoControl.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val nums = mutableListOf(0)
+      var i = 0
+      do {
+        i += 4
+        if (i == 8) continue
+        if (i == 40) break
+        nums.add(i)
+      } while(i < 100)
+      nums eq
+      listOf(0,4,12,16,20,24,28,32,36)
+    }
+  learner_created: false
+- name: src/ForLabeled.kt
+  visible: true
+  text: |-
+    // BreakAndContinue/ForLabeled.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val nums = mutableListOf(0)
+      outer@ for(i in 0..4) {
+        for(j in 1..10) {
+          if (j == 3) continue@outer
+          if (i*j == 15) break@outer
+          nums.add(i*j)
+        }
+      }
+      nums eq
+      listOf(0, 0, 0, 1, 2, 2, 4, 3, 6, 4, 8)
+    }
+  learner_created: false
+- name: src/WhileLabeled.kt
+  visible: true
+  text: |-
+    // BreakAndContinue/WhileLabeled.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val nums = mutableListOf(0)
+      var i = 0
+      outer@ while(i < 4) {
+        i += 1
+        var j = 0
+        while(j < 10) {
+          j += 1
+          if (j == 3) continue@outer
+          if (i*j == 15) break@outer
+          nums.add(i*j)
+        }
+      }
+      nums eq
+      listOf(0, 1, 2, 2, 4, 3, 6, 4, 8)
+    }
+  learner_created: false
+- name: src/DoLabeled.kt
+  visible: true
+  text: |-
+    // BreakAndContinue/DoLabeled.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val nums = mutableListOf(0)
+      var i = 0
+      outer@ do {
+        i += 1
+        var j = 0
+        do {
+          j += 1
+          if (j == 3) continue@outer
+          if (i*j == 15) break@outer
+          nums.add(i*j)
+        } while(j < 10)
+      } while(i < 4)
+      nums eq
+      listOf(0, 1, 2, 2, 4, 3, 6, 4, 8)
+    }
+  learner_created: false
+status: Unchecked
+record: -1

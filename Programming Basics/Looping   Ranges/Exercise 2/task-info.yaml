@@ -1,0 +1,94 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 61
+    length: 6
+    placeholder_text: TODO()
+    dependency:
+      section: Programming Basics
+      lesson: Looping & Ranges
+      task: Exercise 1
+      file: src/Task.kt
+      placeholder: 1
+      is_visible: true
+    initial_state:
+      length: 6
+      offset: 61
+    initialized_from_dependency: false
+    possible_answer: |-
+      var result = 1L
+          for (i in 1..n) {
+              result *= i
+          }
+          return result
+    selected: false
+    status: Unchecked
+  - offset: 111
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 111
+    initialized_from_dependency: false
+    possible_answer: |-
+      var result = 0L
+          for (i in 1..n) {
+              result += factorial(i)
+          }
+          return result
+    selected: false
+    status: Unchecked
+  text: |-
+    package loopingandRanges2
+
+    fun factorial(n: Int): Long {
+        TODO()
+    }
+
+    fun sumOfFactorials(n: Int): Long {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        println(sumOfFactorials(10))  // 4037913
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package loopingandRanges2
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestSumOfFactorials {
+        @Test fun test1() {
+            Assert.assertEquals("sumOfFactorials(1) should be 1",
+                    1, sumOfFactorials(1))
+        }
+
+        @Test fun test2() {
+            Assert.assertEquals("sumOfFactorials(3) should be 9",
+                    9, sumOfFactorials(3))
+        }
+
+        @Test fun test3() {
+            Assert.assertEquals("sumOfFactorials(10) should be 4037913",
+                    4037913, sumOfFactorials(10))
+        }
+
+        @Test fun test4() {
+            Assert.assertEquals("sumOfFactorials(20) should be 2561327494111820313",
+                    2561327494111820313, sumOfFactorials(20))
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Programming+Basics+%2F+Looping+%26+Ranges+%2F+Exercise2
+status: Unchecked
+record: -1

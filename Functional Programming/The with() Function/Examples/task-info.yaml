@@ -1,0 +1,77 @@
+type: theory
+files:
+- name: src/Repetitive.kt
+  visible: true
+  text: |-
+    // WithFunction/Repetitive.kt
+    package withfunction
+    import atomictest.eq
+
+    class Window(
+      val id: String,
+      var x: Int = 0,
+      var y: Int = 0,
+      var width: Int = 200,
+      var height: Int = 100
+    )
+
+    fun adjustWindow(window: Window) {
+      window.x = 10
+      window.y = 10
+      window.width *= 2
+      window.height *= 2
+    }
+
+    fun main(args: Array<String>) {
+      val window = Window("my")
+      adjustWindow(window)
+      window.x eq 10
+      window.width eq 400
+    }
+  learner_created: false
+- name: src/UsingWith.kt
+  visible: true
+  text: |-
+    // WithFunction/UsingWith.kt
+    package withfunction
+    import atomictest.eq
+
+    fun withAdjust(window: Window) {
+      with(window) {
+        x = 10
+        y = 10
+        width *= 2
+        height *= 2
+      }
+    }
+
+    fun main(args: Array<String>) {
+      val window = Window("my")
+      withAdjust(window)
+      window.x eq 10
+      window.width eq 400
+    }
+  learner_created: false
+- name: src/WithDeclaration.kt
+  visible: true
+  text: |-
+    // WithFunction/WithDeclaration.kt
+    package simplifieddeclaration
+    import withfunction.Window
+
+    fun <T> with(
+      receiver: T,                 // [1]
+      operations: T.() -> Unit     // [2]
+    ) = receiver.operations()      // [3]
+
+    fun withAdjust(window: Window) {
+      with(window) {               // [4]
+        this.x = 10                // [5]
+        y = 10                     // [6]
+        width *= 2
+        height *= 2
+      }
+    }
+  learner_created: false
+status: Unchecked
+record: -1

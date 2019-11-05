@@ -1,0 +1,129 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 335
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 335
+    initialized_from_dependency: false
+    possible_answer: |-
+      when (this) {
+          December, January, February -> Summer
+          March, April, May -> Autumn
+          June, July, August -> Winter
+          September, October, November -> Spring
+      }
+    selected: false
+    status: Unchecked
+  - offset: 361
+    length: 0
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 361
+    initialized_from_dependency: false
+    possible_answer: 'leapYear: Boolean = false'
+    selected: false
+    status: Unchecked
+  - offset: 370
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 370
+    initialized_from_dependency: false
+    possible_answer: |-
+      when (this) {
+          January, March, May, July,
+          August, October, December -> 31
+
+          April, June, September, November -> 30
+
+          February -> if (leapYear) 29 else 28
+      }
+    selected: false
+    status: Unchecked
+  text: |-
+    package enumerations2
+
+    import atomictest.eq
+    import enumerations2.Month.*
+    import enumerations2.Season.*
+
+    enum class Month {
+        January, February, March, April,
+        May, June, July, August,
+        September, October, November, December
+    }
+
+    enum class Season {
+        Winter, Spring, Summer, Autumn
+    }
+
+    fun Month.getAustralianSeason(): Season = TODO()
+
+    fun Month.getDays(): Int = TODO()
+
+    fun main(args: Array<String>) {
+        January.getAustralianSeason() eq Summer
+        May.getAustralianSeason() eq Autumn
+
+        January.getDays() eq 31
+    /*
+        February.getDays(leapYear = false) eq 28
+        February.getDays(leapYear = true) eq 29
+    */
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package enumerations2
+
+    import enumerations2.Month.*
+    import enumerations2.Season.*
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestEnumerations {
+        private val seasons: Map<Month, Season> = mapOf(
+                December to Summer, January to Summer, February to Summer,
+                March to Autumn, April to Autumn, May to Autumn,
+                June to Winter, July to Winter, August to Winter,
+                September to Spring, October to Spring, November to Spring
+        )
+
+        @Test fun test1Seasons() {
+            for (month in Month.values()) {
+                Assert.assertEquals("Wrong australian season for $month:", seasons[month], month.getAustralianSeason())
+            }
+        }
+
+        private fun Month.expected(leapYear: Boolean = false): Int = when (this) {
+            January, March, May, July,
+            August, October, December -> 31
+
+            April, June, September, November -> 30
+
+            February -> if (leapYear) 29 else 28
+        }
+
+        @Test fun test2Days() {
+            for (month in Month.values()) {
+                Assert.assertEquals("Wrong days for $month:", month.expected(false), month.expected(false))
+                Assert.assertEquals("Wrong days for $month in a leap year:", month.expected(true), month.expected(true))
+            }
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Usability+%2F+Enumerations+%2F+Exercise2
+status: Unchecked
+record: -1

@@ -1,0 +1,62 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 60
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 60
+    initialized_from_dependency: false
+    possible_answer: ch in 'a'..'z'
+    selected: false
+    status: Unchecked
+  text: |-
+    package theinKeyword3
+
+    fun isLowerCase(ch: Char): Boolean = TODO()
+
+    fun main(args: Array<String>) {
+        println(isLowerCase('A'))  // false
+        println(isLowerCase('b'))  // true
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package theinKeyword3
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestForLoops3 {
+        @Test fun test1LowerCaseC() {
+            Assert.assertTrue("'c' is a lower case letter", isLowerCase('c'))
+        }
+
+        @Test fun test2LowerCaseA() {
+            Assert.assertTrue("'a' is a lower case letter", isLowerCase('a'))
+        }
+
+        @Test fun test3LowerCaseZ() {
+            Assert.assertTrue("'z' is a lower case letter", isLowerCase('z'))
+        }
+
+        @Test fun test4UpperCase() {
+            Assert.assertFalse("'A' is an upper case letter", isLowerCase('A'))
+        }
+
+        @Test fun test5Digit() {
+            Assert.assertFalse("'1' is not a lower case letter", isLowerCase('1'))
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Programming+Basics+%2F+The+in+Keyword+%2F+Exercise3
+status: Unchecked
+record: -1

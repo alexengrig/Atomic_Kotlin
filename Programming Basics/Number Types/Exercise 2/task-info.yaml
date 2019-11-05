@@ -1,0 +1,137 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 98
+    length: 1
+    placeholder_text: 0
+    initial_state:
+      length: 1
+      offset: 98
+    initialized_from_dependency: false
+    possible_answer: 1_000_000_000
+    selected: false
+    status: Unchecked
+  - offset: 126
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 126
+    initialized_from_dependency: false
+    possible_answer: '"Int"'
+    selected: false
+    status: Unchecked
+  - offset: 149
+    length: 1
+    placeholder_text: 0
+    initial_state:
+      length: 1
+      offset: 149
+    initialized_from_dependency: false
+    possible_answer: 1_000_000_000_000
+    selected: false
+    status: Unchecked
+  - offset: 178
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 178
+    initialized_from_dependency: false
+    possible_answer: '"Long"'
+    selected: false
+    status: Unchecked
+  - offset: 204
+    length: 1
+    placeholder_text: 0
+    initial_state:
+      length: 1
+      offset: 204
+    initialized_from_dependency: false
+    possible_answer: 1_000_000_000_000_000_000
+    selected: false
+    status: Unchecked
+  - offset: 236
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 236
+    initialized_from_dependency: false
+    possible_answer: '"Long"'
+    selected: false
+    status: Unchecked
+  text: |-
+    package numberTypes2
+
+    val million: Int = 1_000_000
+    val millionType: String = "Int"
+
+    val billion = 0
+    val billionType: String = TODO()
+
+    val trillion = 0
+    val trillionType: String = TODO()
+
+    val quintillion = 0
+    val quintillionType: String = TODO()
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package numberTypes2
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestNumberTypes2 {
+        @Test
+        fun test1Million() {
+            Assert.assertEquals(1_000_000, million)
+        }
+
+        @Test
+        fun test2Billion() {
+            Assert.assertEquals(1_000_000_000, billion)
+        }
+
+        @Test
+        fun test3Trillion() {
+            Assert.assertEquals(1_000_000_000_000, trillion)
+        }
+
+        @Test
+        fun test4Quintillion() {
+            Assert.assertEquals(1_000_000_000_000_000_000, quintillion)
+        }
+
+        @Test
+        fun test5MillionType() {
+            Assert.assertEquals("Int", millionType)
+        }
+
+        @Test
+        fun test6BillionType() {
+            Assert.assertEquals("Int", billionType)
+        }
+
+        @Test
+        fun test7TrillionType() {
+            Assert.assertEquals("Long", trillionType)
+        }
+
+        @Test
+        fun test8QuintillionType() {
+            Assert.assertEquals("Long", quintillionType)
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Programming+Basics+%2F+Number+Types+%2F+Exercise2
+status: Unchecked
+record: -1

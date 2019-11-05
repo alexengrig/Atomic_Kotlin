@@ -1,0 +1,101 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 287
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 287
+    initialized_from_dependency: false
+    possible_answer: |-
+      if (first == second) return DRAW
+          val winningCombinations = mapOf(
+                  ROCK to SCISSORS,
+                  SCISSORS to PAPER,
+                  PAPER to ROCK)
+          if (winningCombinations[first] == second) {
+              return FIRST_WINS
+          }
+          return SECOND_WINS
+    selected: false
+    status: Unchecked
+  text: |-
+    package enumerations3
+
+    import atomictest.eq
+    import enumerations3.Result.*
+    import enumerations3.Rochambeau.*
+
+    enum class Rochambeau {
+        ROCK, PAPER, SCISSORS
+    }
+
+    enum class Result {
+        DRAW, FIRST_WINS, SECOND_WINS
+    }
+
+    fun findWinner(first: Rochambeau, second: Rochambeau): Result {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        findWinner(ROCK, SCISSORS) eq FIRST_WINS
+        findWinner(SCISSORS, ROCK) eq SECOND_WINS
+        findWinner(PAPER, PAPER) eq DRAW
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package enumerations3
+
+    import enumerations3.Result.*
+    import enumerations3.Rochambeau.*
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestEnumerationsRochambeau {
+        private fun checkResult(first: Rochambeau, second: Rochambeau, expected: Result) {
+            Assert.assertEquals("Wrong answer for 'findWinner($first, $second)':",
+                    expected, findWinner(first, second))
+        }
+
+        @Test
+        fun test1Sample() {
+            checkResult(ROCK, SCISSORS, FIRST_WINS)
+            checkResult(SCISSORS, ROCK, SECOND_WINS)
+            checkResult(PAPER, PAPER, DRAW)
+        }
+
+        @Test
+        fun test2FirstWins() {
+            checkResult(PAPER, ROCK, FIRST_WINS)
+            checkResult(ROCK, SCISSORS, FIRST_WINS)
+            checkResult(SCISSORS, PAPER, FIRST_WINS)
+        }
+
+        @Test
+        fun test3FirstWins() {
+            checkResult(ROCK, PAPER, SECOND_WINS)
+            checkResult(SCISSORS, ROCK, SECOND_WINS)
+            checkResult(PAPER, SCISSORS, SECOND_WINS)
+        }
+
+        @Test
+        fun test4Draw() {
+            checkResult(ROCK, ROCK, DRAW)
+            checkResult(SCISSORS, SCISSORS, DRAW)
+            checkResult(PAPER, PAPER, DRAW)
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Usability+%2F+Enumerations+%2F+Exercise3
+status: Unchecked
+record: -1

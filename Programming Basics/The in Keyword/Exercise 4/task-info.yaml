@@ -1,0 +1,91 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 23
+    length: 0
+    placeholder_text: ""
+    initial_state:
+      length: 0
+      offset: 23
+    initialized_from_dependency: false
+    possible_answer: |-
+      fun isValidCharacter(ch: Char): Boolean = ch == '_' ||
+              ch in 'a'..'z' || ch in 'A'..'Z' ||
+              ch in '0'..'9'
+    selected: false
+    status: Unchecked
+  - offset: 73
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 73
+    initialized_from_dependency: false
+    possible_answer: |-
+      if (s.isEmpty() || s[0] in '0'..'9') return false
+          for (ch in s) {
+              if (!isValidCharacter(ch)) return false
+          }
+          return true
+    selected: false
+    status: Unchecked
+  text: |-
+    package theinKeyword4
+
+
+
+    fun isValidIdentifier(s: String): Boolean {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        println(isValidIdentifier("name"))  // true
+        println(isValidIdentifier("0name"))  // false
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package theinKeyword4
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestValidIdentifier {
+
+        private fun checkValidIdentifier(s: String) {
+            Assert.assertTrue("'$s' is a valid identifier", isValidIdentifier(s))
+        }
+
+        private fun checkInvalidIdentifier(s: String) {
+            Assert.assertFalse("'$s' is not a valid identifier", isValidIdentifier(s))
+        }
+
+        @Test fun test1Simple() = checkValidIdentifier("name")
+
+        @Test fun test2StartsWithUnderscore() = checkValidIdentifier("_name")
+
+        @Test fun test3Underscore() = checkValidIdentifier("_")
+
+        @Test fun test4ContainsDigits() = checkValidIdentifier("n01")
+
+        @Test fun test5UpperCase() = checkValidIdentifier("NNN")
+
+        @Test fun test6Valid() = checkValidIdentifier("_N01")
+
+        @Test fun test7Empty() = checkInvalidIdentifier("")
+
+        @Test fun test8StartsWithDigit() = checkInvalidIdentifier("1_")
+
+        @Test fun test9ContainsIllegalCharacters() = checkInvalidIdentifier("&%$")
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Programming+Basics+%2F+The+in+Keyword+%2F+Exercise4
+status: Unchecked
+record: -1

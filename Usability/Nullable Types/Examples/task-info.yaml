@@ -1,0 +1,82 @@
+type: theory
+files:
+- name: src/NullInMaps.kt
+  visible: true
+  text: |-
+    // NullableTypes/NullInMaps.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val map = mapOf(0 to "yes", 1 to "no")
+      map[2] eq null
+    }
+  learner_created: false
+- name: src/NullableTypes.kt
+  visible: true
+  text: |-
+    // NullableTypes/NullableTypes.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val s1 = "abc"            // [1]
+
+      // Compile-time error:
+      // val s2: String = null  // [2]
+
+      // Nullable definitions:
+      val s3: String? = null    // [3]
+      val s4: String? = s1
+
+      // Compile-time error:
+      // val s5: String = s4    // [4]
+      val s6 = s4               // [5]
+
+      s1 eq "abc"
+      s3 eq null
+      s4 eq "abc"
+      s6 eq "abc"
+    }
+  learner_created: false
+- name: src/NullableInMap.kt
+  visible: true
+  text: |-
+    // NullableTypes/NullableInMap.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val map = mapOf(0 to "yes", 1 to "no")
+      val first: String? = map[0]
+      val second: String? = map[2]
+      first eq "yes"
+      second eq null
+    }
+  learner_created: false
+- name: src/Dereference.kt
+  visible: true
+  text: |-
+    // NullableTypes/Dereference.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val s1: String = "abc"
+      val s2: String? = s1
+
+      s1.length eq 3          // [1]
+      // Doesn't compile:
+      // s2.length            // [2]
+    }
+  learner_created: false
+- name: src/ExplicitCheck.kt
+  visible: true
+  text: |-
+    // NullableTypes/ExplicitCheck.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val s: String? = "abc"
+      if (s != null)
+        s.length eq 3
+    }
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,95 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 75
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 75
+    initialized_from_dependency: false
+    possible_answer: |-
+      for (i in 0 until s.length()) {
+              if (s.get(i) != s.get(s.length() - 1 - i)) return false
+          }
+          return true
+    selected: false
+    status: Unchecked
+  text: |-
+    package creatingClasses1
+
+    fun isPalindrome(s: SimpleString): Boolean {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        println(isPalindrome(SimpleString("mom")))
+        println(isPalindrome(SimpleString("mom!")))
+    }
+    /* Output:
+    true
+    */
+  learner_created: false
+- name: src/SimpleString.kt
+  visible: true
+  text: |-
+    package creatingClasses1
+
+    /**
+     * The `SimpleString` class is a toy class
+     * for representing strings used in AtomicKotlin course.
+     */
+    class SimpleString(private val s: String) {
+
+        /** Returns the `Char` value at the specified [index].
+         */
+        fun get(index: Int): Char = s[index]
+
+        /**
+         * Returns the length of this string.
+         */
+        fun length() = s.length
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package creatingClasses1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestSimpleStringPalindrome {
+        private fun checkPalindrome(s: String, expected: Boolean) {
+            Assert.assertEquals("""Wrong result for calling isPalindrome() on SimpleString("$s"):""",
+                    expected, isPalindrome(SimpleString(s)))
+        }
+
+        @Test fun testPalindrome1() = checkPalindrome("mom", true)
+
+        @Test fun testPalindrome2() = checkPalindrome("dad", true)
+
+        @Test fun testPalindrome3() = checkPalindrome("street", false)
+
+        @Test fun testPalindrome4() = checkPalindrome("brr", false)
+
+        @Test fun testPalindrome5() = checkPalindrome("A", true)
+
+        @Test fun testPalindrome6() = checkPalindrome("rr", true)
+
+        @Test fun testPalindrome7() = checkPalindrome("abccba", true)
+
+        @Test fun testPalindrome8() = checkPalindrome("abcba", true)
+
+        @Test fun testPalindrome9() = checkPalindrome("qwertyuiopoiuytrewq", true)
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Introduction+to+Objects+%2F+Creating+Classes+%2F+Exercise1
+status: Unchecked
+record: -1

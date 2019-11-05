@@ -1,0 +1,104 @@
+type: theory
+files:
+- name: src/Arg.kt
+  visible: true
+  text: |-
+    // Constructors/Arg.kt
+
+    class Alien(name: String) {
+      val greeting = "Poor $name!"
+    }
+
+    fun main(args: Array<String>) {
+      val alien = Alien("Mr. Meeseeks")
+      println(alien.greeting)
+      // alien.name // Error     // [1]
+    }
+    /* Output:
+    Poor Mr. Meeseeks!
+    */
+  learner_created: false
+- name: src/VisibleArgs.kt
+  visible: true
+  text: |-
+    // Constructors/VisibleArgs.kt
+
+    class MutableNameAlien(var name: String)
+
+    class FixedNameAlien(val name: String)
+
+    fun main(args: Array<String>) {
+      val alien1 =
+        MutableNameAlien("Reverse Giraffe")
+      val alien2 =
+        FixedNameAlien("Krombopolis Michael")
+
+      alien1.name = "Parasite"
+      // Can't do this:
+      // alien2.name = "Parasite"
+    }
+  learner_created: false
+- name: src/MultipleArgs.kt
+  visible: true
+  text: |-
+    // Constructors/MultipleArgs.kt
+
+    class AlienSpecies(
+      val name: String,
+      val eyes: Int,
+      val hands: Int,
+      val legs: Int
+    ) {
+      fun describe() =
+        "$name with $eyes eyes, " +
+        "$hands hands and $legs legs"
+    }
+
+    fun main(args: Array<String>) {
+      val shim =
+        AlienSpecies("Shimshamian", 3, 2, 2)
+      val grung =
+        AlienSpecies("Grunglokian", 2, 4, 2)
+      println(shim.describe())
+      println(grung.describe())
+    }
+    /* Output:
+    Shimshamian with 3 eyes, 2 hands and 2 legs
+    Grunglokian with 2 eyes, 4 hands and 2 legs
+    */
+  learner_created: false
+- name: src/DisplayAlienSpecies.kt
+  visible: true
+  text: |-
+    // Constructors/DisplayAlienSpecies.kt
+
+    fun main(args: Array<String>) {
+      val alien =
+        AlienSpecies("Narduarvian", 2, 2, 4)
+      println(alien)
+    }
+    /* Sample output:
+    AlienSpecies@4d7e1886
+    */
+  learner_created: false
+- name: src/GoodAlien.kt
+  visible: true
+  text: |-
+    // Constructors/GoodAlien.kt
+
+    class GoodAlien(val name: String) {
+      override fun toString(): String {
+        return "GoodAlien('$name')"
+      }
+    }
+
+    fun main(args: Array<String>) {
+      val birdPerson = GoodAlien("Birdperson")
+      println(birdPerson)
+    }
+    /* Output:
+    GoodAlien('Birdperson')
+    */
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,175 @@
+type: theory
+files:
+- name: src/InferInt.kt
+  visible: true
+  text: |-
+    // NumberTypes/InferInt.kt
+
+    fun main(args: Array<String>) {
+      val million = 1_000_000  // Infers Int
+      println(million)
+    }
+    /* Output:
+    1000000
+    */
+  learner_created: false
+- name: src/Modulus.kt
+  visible: true
+  text: |-
+    // NumberTypes/Modulus.kt
+
+    fun main(args: Array<String>) {
+      val numerator: Int = 19
+      val denominator: Int = 10
+      println(numerator % denominator)
+    }
+    /* Output:
+    9
+    */
+  learner_created: false
+- name: src/IntDivisionTruncates.kt
+  visible: true
+  text: |-
+    // NumberTypes/IntDivisionTruncates.kt
+
+    fun main(args: Array<String>) {
+      val numerator: Int = 19
+      val denominator: Int = 10
+      println(numerator / denominator)
+    }
+    /* Output:
+    1
+    */
+  learner_created: false
+- name: src/OpOrder.kt
+  visible: true
+  text: |-
+    // NumberTypes/OpOrder.kt
+
+    fun main(args: Array<String>) {
+      println(45 + 5 * 6)
+    }
+    /* Output:
+    75
+    */
+  learner_created: false
+- name: src/OpOrderParens.kt
+  visible: true
+  text: |-
+    // NumberTypes/OpOrderParens.kt
+
+    fun main(args: Array<String>) {
+      println( (45 + 5) * 6 )
+    }
+    /* Output:
+    300
+    */
+  learner_created: false
+- name: src/BMI.kt
+  visible: true
+  text: |-
+    // NumberTypes/BMI.kt
+
+    fun bmiStatus(
+      kg: Double,
+      heightM: Double
+    ): String {
+      val bmi = kg / (heightM * heightM)    // [1]
+      return if (bmi < 18.5) "Underweight"
+        else if (bmi < 25) "Normal weight"
+        else "Overweight"
+    }
+
+    fun main(args: Array<String>) {
+      val kg = 72.57 // 160 lbs
+      val heightM = 1.727 // 68 inches
+      val status = bmiStatus(kg, heightM)
+      println(status)
+    }
+    /* Output:
+    Normal weight
+    */
+  learner_created: false
+- name: src/IntegerMath.kt
+  visible: true
+  text: |-
+    // NumberTypes/IntegerMath.kt
+
+    fun bmiStatusInt(
+      lbs: Int,
+      height: Int
+    ): String {
+      val bmi =
+        lbs / (height * height) * 703.07 // [1]
+      return if (bmi < 18.5) "Underweight"
+        else if (bmi < 25) "Normal weight"
+        else "Overweight"
+    }
+
+    fun main(args: Array<String>) {
+      val lbs = 160
+      val height = 68
+      val status = bmiStatusInt(lbs, height)
+      println(status)
+    }
+    /* Output:
+    Underweight
+    */
+  learner_created: false
+- name: src/IntegerOverflow.kt
+  visible: true
+  text: |-
+    // NumberTypes/IntegerOverflow.kt
+
+    fun main(args: Array<String>) {
+      val i: Int = Int.MAX_VALUE
+      println(i + i)
+    }
+    /* Output:
+    -2
+    */
+  learner_created: false
+- name: src/LongConstants.kt
+  visible: true
+  text: |-
+    // NumberTypes/LongConstants.kt
+
+    fun main(args: Array<String>) {
+      val i = 0          // Infers Int
+      val l1 = 0L        // L creates Long
+      val l2: Long = 0   // Explicit type
+      println("$l1 $l2")
+    }
+    /* Output:
+    0 0
+    */
+  learner_created: false
+- name: src/UsingLongs.kt
+  visible: true
+  text: |-
+    // NumberTypes/UsingLongs.kt
+
+    fun main(args: Array<String>) {
+      val i = Int.MAX_VALUE
+      println(0L + i + i)              // [1]
+      println(1_000_000 * 1_000_000L)  // [2]
+    }
+    /* Output:
+    4294967294
+    1000000000000
+    */
+  learner_created: false
+- name: src/BiggestLong.kt
+  visible: true
+  text: |-
+    // NumberTypes/BiggestLong.kt
+
+    fun main(args: Array<String>) {
+      println(Long.MAX_VALUE)
+    }
+    /* Output:
+    9223372036854775807
+    */
+  learner_created: false
+status: Unchecked
+record: -1

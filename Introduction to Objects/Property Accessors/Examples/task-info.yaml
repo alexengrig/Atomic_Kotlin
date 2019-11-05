@@ -1,0 +1,149 @@
+type: theory
+files:
+- name: src/Data.kt
+  visible: true
+  text: |-
+    // PropertyAccessors/Data.kt
+    package propertyaccessors
+    import atomictest.eq
+
+    class Data(var i: Int)
+
+    fun main(args: Array<String>) {
+      val data = Data(10)
+      data.i eq 10 // Read the 'i' property
+      data.i = 20  // Write to the 'i' property
+    }
+  learner_created: false
+- name: src/Default.kt
+  visible: true
+  text: |-
+    // PropertyAccessors/Default.kt
+
+    class Default {
+      var i: Int = 0
+        get() {
+          println("get()")
+          return field         // [1]
+        }
+        set(value) {
+          println("set($value)")
+          field = value        // [2]
+        }
+    }
+
+    fun main(args: Array<String>) {
+      val d = Default()
+      d.i = 2
+      println(d.i)
+    }
+    /* Output:
+    set(2)
+    get()
+    2
+    */
+  learner_created: false
+- name: src/LogChanges.kt
+  visible: true
+  text: |-
+    // PropertyAccessors/LogChanges.kt
+    import atomictest.eq
+
+    class LogChanges {
+      var n: Int = 0
+        set(value) {
+          println("$field becomes $value")
+          field = value
+        }
+    }
+
+    fun main(args: Array<String>) {
+      val lc = LogChanges()
+      lc.n eq 0
+      lc.n = 2
+      lc.n eq 2
+    }
+    /* Output:
+    0
+    0 becomes 2
+    2
+    */
+  learner_created: false
+- name: src/Counter.kt
+  visible: true
+  text: |-
+    // PropertyAccessors/Counter.kt
+    package propertyaccessors
+    import atomictest.eq
+
+    class Counter {
+      var value: Int = 0
+        private set
+      fun inc() = value++
+    }
+
+    fun main(args: Array<String>) {
+      val counter = Counter()
+      repeat(10) {
+        counter.inc()
+      }
+      counter.value eq 10
+    }
+  learner_created: false
+- name: src/Hamsters.kt
+  visible: true
+  text: |-
+    // PropertyAccessors/Hamsters.kt
+    package propertyaccessors
+    import atomictest.eq
+
+    class Hamster(val name: String)
+
+    class Cage(private val maxCapacity: Int) {
+      private val hamsters =
+        mutableListOf<Hamster>()
+      val capacity: Int
+        get() = maxCapacity - hamsters.size
+      val full: Boolean
+        get() = hamsters.size == maxCapacity
+      fun put(hamster: Hamster): Boolean =
+        if (full)
+          false
+        else {
+          hamsters += hamster
+          true
+        }
+      fun takeHamster(): Hamster =
+        hamsters.removeAt(0)
+    }
+
+    fun main(args: Array<String>) {
+      val cage = Cage(2)
+      cage.full eq false
+      cage.capacity eq 2
+      cage.put(Hamster("Alice")) eq true
+      cage.put(Hamster("Bob")) eq true
+      cage.full eq true
+      cage.capacity eq 0
+      cage.put(Hamster("Charlie")) eq false
+      cage.takeHamster()
+      cage.capacity eq 1
+    }
+  learner_created: false
+- name: src/Hamsters2.kt
+  visible: true
+  text: |-
+    // PropertyAccessors/Hamsters2.kt
+    package propertyaccessors
+
+    class Cage2(private val maxCapacity: Int) {
+      private val hamsters =
+        mutableListOf<Hamster>()
+      fun capacity(): Int =
+        maxCapacity - hamsters.size
+      fun isFull(): Boolean =
+        hamsters.size == maxCapacity
+    }
+  learner_created: false
+status: Unchecked
+record: -1

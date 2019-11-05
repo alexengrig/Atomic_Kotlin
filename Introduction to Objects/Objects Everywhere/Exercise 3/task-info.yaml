@@ -1,0 +1,111 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 67
+    length: 6
+    placeholder_text: TODO()
+    dependency:
+      section: Introduction to Objects
+      lesson: Objects Everywhere
+      task: Exercise 2
+      file: src/Task.kt
+      placeholder: 1
+      is_visible: true
+    initial_state:
+      length: 6
+      offset: 67
+    initialized_from_dependency: false
+    possible_answer: s.reversed() == s
+    selected: false
+    status: Unchecked
+  - offset: 125
+    length: 6
+    placeholder_text: TODO()
+    dependency:
+      section: Introduction to Objects
+      lesson: Objects Everywhere
+      task: Exercise 2
+      file: src/Task.kt
+      placeholder: 2
+      is_visible: true
+    initial_state:
+      length: 6
+      offset: 125
+    initialized_from_dependency: false
+    possible_answer: isPalindrome(s.toLowerCase())
+    selected: false
+    status: Unchecked
+  - offset: 182
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 182
+    initialized_from_dependency: false
+    possible_answer: |-
+      var onlyLetters = ""
+          for (c in s) {
+              if (c in 'a'..'z' || c in 'A'..'Z') {
+                  onlyLetters += c
+              }
+          }
+          return isPalIgnoreCase(onlyLetters)
+    selected: false
+    status: Unchecked
+  text: |-
+    package objectsEverywhere3
+
+    fun isPalindrome(s: String): Boolean = TODO()
+
+    fun isPalIgnoreCase(s: String): Boolean =
+            TODO()
+
+    fun isPalIgnoreSpecial(s: String): Boolean {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        println(isPalIgnoreSpecial("Was It A Rat I Saw? ..."))  // true
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package objectsEverywhere3
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestClassesAndObjects3 {
+        private fun checkPalindrome(s: String, expected: Boolean) {
+            Assert.assertEquals("""Wrong result for isPalIgnoreSpecial("$s"):""", expected, isPalIgnoreSpecial(s))
+        }
+
+        @Test fun testPalindrome0() = checkPalindrome("AAA!", true)
+
+        @Test fun testPalindrome1() = checkPalindrome("Was It A Rat I Saw? ...", true)
+
+        @Test fun testPalindrome2() = checkPalindrome("A Man, A Plan, A Canal-Panama!", true)
+
+        @Test fun testPalindrome3() = checkPalindrome("Madam In Eden, I'm Adam", true)
+
+        @Test fun testPalindrome4() = checkPalindrome("Mr. Owl Ate My Metal Worm", true)
+
+        @Test fun testPalindrome5() = checkPalindrome("A Santa Lived As a Devil At NASA", true)
+
+        @Test fun testPalindrome6() = checkPalindrome("Dammit, I'm Mad! ...", true)
+
+        @Test fun testPalindrome7() = checkPalindrome("Do Geese See God?", true)
+
+        @Test fun testPalindrome8() = checkPalindrome("Not a palindrome!", false)
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Introduction+to+Objects+%2F+Objects+Everywhere+%2F+Exercise3
+status: Unchecked
+record: -1

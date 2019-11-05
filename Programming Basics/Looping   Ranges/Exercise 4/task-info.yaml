@@ -1,0 +1,103 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 62
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 62
+    initialized_from_dependency: false
+    possible_answer: |-
+      for (i in 1..n) {
+              repeat(i) {
+                  print("#")
+              }
+              println()
+          }
+    selected: false
+    status: Unchecked
+  text: |-
+    package loopingandRanges4
+
+    fun printHalfPyramid(n: Int) {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        printHalfPyramid(4)
+    }
+    /* Output:
+    #
+    ##
+    ###
+    ####
+    */
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package loopingandRanges4
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+    import java.io.ByteArrayOutputStream
+    import java.io.PrintStream
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestHalfPyramid {
+        private fun checkOutput(n: Int, expected: String) {
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            System.setOut(PrintStream(byteArrayOutputStream))
+            printHalfPyramid(n)
+            Assert.assertEquals("Incorrect output for n = $n:",
+                    expected, byteArrayOutputStream.toString())
+        }
+
+        @Test fun testPyramid1() = checkOutput(1, "#\n")
+
+        @Test fun testPyramid2() = checkOutput(2,
+                """
+                    |#
+                    |##
+                    |
+                """.trimMargin())
+
+        @Test fun testPyramid3() = checkOutput(3,
+                """
+                    |#
+                    |##
+                    |###
+                    |
+                """.trimMargin())
+
+        @Test fun testPyramid4() = checkOutput(4,
+                """
+                    |#
+                    |##
+                    |###
+                    |####
+                    |
+                """.trimMargin())
+
+        @Test fun testPyramid6() = checkOutput(6,
+                """
+                    |#
+                    |##
+                    |###
+                    |####
+                    |#####
+                    |######
+                    |
+                """.trimMargin())
+
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Programming+Basics+%2F+Looping+%26+Ranges+%2F+Exercise4
+status: Unchecked
+record: -1

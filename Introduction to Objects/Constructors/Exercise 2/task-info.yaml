@@ -1,0 +1,263 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 35
+    length: 8
+    placeholder_text: /*TODO*/
+    dependency:
+      section: Introduction to Objects
+      lesson: Constructors
+      task: Exercise 1
+      file: src/Task.kt
+      placeholder: 1
+      is_visible: true
+    initial_state:
+      length: 8
+      offset: 35
+    initialized_from_dependency: false
+    possible_answer: 'val fieldSize: Int, var x: Int, var y: Int'
+    selected: false
+    status: Unchecked
+  - offset: 47
+    length: 0
+    placeholder_text: ""
+    dependency:
+      section: Introduction to Objects
+      lesson: Constructors
+      task: Exercise 1
+      file: src/Task.kt
+      placeholder: 2
+      is_visible: true
+    initial_state:
+      length: 0
+      offset: 47
+    initialized_from_dependency: false
+    possible_answer: |2
+          fun crossBoundary(coordinate: Int): Int {
+              val inBounds = coordinate % fieldSize
+              return if (inBounds < 0) {
+                 fieldSize + inBounds
+              }
+              else {
+                  inBounds
+              }
+          }
+    selected: false
+    status: Unchecked
+  - offset: 86
+    length: 6
+    placeholder_text: TODO()
+    dependency:
+      section: Introduction to Objects
+      lesson: Constructors
+      task: Exercise 1
+      file: src/Task.kt
+      placeholder: 3
+      is_visible: true
+    initial_state:
+      length: 6
+      offset: 86
+    initialized_from_dependency: false
+    possible_answer: |-
+      x += steps
+              x = crossBoundary(x)
+    selected: false
+    status: Unchecked
+  - offset: 137
+    length: 6
+    placeholder_text: TODO()
+    dependency:
+      section: Introduction to Objects
+      lesson: Constructors
+      task: Exercise 1
+      file: src/Task.kt
+      placeholder: 4
+      is_visible: true
+    initial_state:
+      length: 6
+      offset: 137
+    initialized_from_dependency: false
+    possible_answer: |-
+      x -= steps
+              x = crossBoundary(x)
+    selected: false
+    status: Unchecked
+  - offset: 188
+    length: 6
+    placeholder_text: TODO()
+    dependency:
+      section: Introduction to Objects
+      lesson: Constructors
+      task: Exercise 1
+      file: src/Task.kt
+      placeholder: 5
+      is_visible: true
+    initial_state:
+      length: 6
+      offset: 188
+    initialized_from_dependency: false
+    possible_answer: |-
+      y += steps
+              y = crossBoundary(y)
+    selected: false
+    status: Unchecked
+  - offset: 237
+    length: 6
+    placeholder_text: TODO()
+    dependency:
+      section: Introduction to Objects
+      lesson: Constructors
+      task: Exercise 1
+      file: src/Task.kt
+      placeholder: 6
+      is_visible: true
+    initial_state:
+      length: 6
+      offset: 237
+    initialized_from_dependency: false
+    possible_answer: |-
+      y -= steps
+              y = crossBoundary(y)
+    selected: false
+    status: Unchecked
+  - offset: 283
+    length: 6
+    placeholder_text: TODO()
+    dependency:
+      section: Introduction to Objects
+      lesson: Constructors
+      task: Exercise 1
+      file: src/Task.kt
+      placeholder: 7
+      is_visible: true
+    initial_state:
+      length: 6
+      offset: 283
+    initialized_from_dependency: false
+    possible_answer: '"($x,$y)"'
+    selected: false
+    status: Unchecked
+  - offset: 295
+    length: 27
+    placeholder_text: /*Implement toString here*/
+    initial_state:
+      length: 27
+      offset: 295
+    initialized_from_dependency: false
+    possible_answer: override fun toString() = "Robot(x=$x,y=$y)"
+    selected: false
+    status: Unchecked
+  text: |-
+    package constructors2
+
+    class Robot(/*TODO*/) {
+
+        fun goRight(steps: Int) {
+            TODO()
+        }
+
+        fun goLeft(steps: Int) {
+            TODO()
+        }
+
+        fun goDown(steps: Int) {
+            TODO()
+        }
+
+        fun goUp(steps: Int) {
+            TODO()
+        }
+
+        fun getLocation(): String = TODO()
+
+        /*Implement toString here*/
+    }
+
+    /*
+    fun main(args: Array<String>) {
+        val robot = Robot(10, 1, 1)
+        println(robot)
+    }
+    */
+    /* Output:
+    Robot(1,1)
+    */
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package constructors2
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestRobotToString {
+        class RobotHandler(fieldSize: Int, var x: Int, var y: Int) {
+            val robot: Robot = Robot(fieldSize, x, y)
+            val loggedMovements = StringBuilder()
+
+            fun goRight(steps: Int) {
+                robot.goRight(steps)
+                loggedMovements.appendln("goRight($steps)")
+            }
+
+            fun goLeft(steps: Int) {
+                robot.goLeft(steps)
+                loggedMovements.appendln("goLeft($steps)")
+
+            }
+
+            fun goDown(steps: Int) {
+                robot.goDown(steps)
+                loggedMovements.appendln("goDown($steps)")
+
+            }
+
+            fun goUp(steps: Int) {
+                robot.goUp(steps)
+                loggedMovements.appendln("goUp($steps)")
+            }
+        }
+
+        private fun testMovements(string: String, fieldSize: Int, x: Int, y: Int,
+                                  movements: RobotHandler.() -> Unit) {
+            val robotHandler = RobotHandler(fieldSize, x, y)
+            robotHandler.movements()
+            val actualString = robotHandler.robot.toString()
+            val message = if (robotHandler.loggedMovements.isEmpty()) {
+                "Initial location of the robot should be ($x,$y)"
+            } else {
+                "Starting location: ($x, $y), field size: $fieldSize.\n" +
+                        "Wrong location after:\n" + robotHandler.loggedMovements
+            }
+            Assert.assertEquals(message, string, actualString)
+        }
+
+        @Test
+        fun test1Initial() = testMovements("Robot(x=2,y=3)", 10, 2, 3) {}
+
+        @Test
+        fun test2Right() = testMovements("Robot(x=3,y=3)", 10, 2, 3) {
+            goRight(1)
+        }
+
+        @Test
+        fun test3Circle() = testMovements("Robot(x=2,y=3)", 10, 2, 3) {
+            goRight(10)
+            goLeft(10)
+            goDown(10)
+            goUp(10)
+        }
+    }
+
+    fun Robot(vararg a: Any?): Robot = TODO()
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Introduction+to+Objects+%2F+Constructors+%2F+Exercise2
+status: Unchecked
+record: -1

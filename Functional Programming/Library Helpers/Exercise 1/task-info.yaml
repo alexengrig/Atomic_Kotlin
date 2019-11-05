@@ -1,0 +1,59 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 118
+    length: 87
+    placeholder_text: "\n    x.let {\n        it.first = 1\n        it.second = 2\n\
+      \        it.third = 3\n    }\n    "
+    initial_state:
+      length: 87
+      offset: 118
+    initialized_from_dependency: false
+    possible_answer: "with(x) {\n        first = 1\n        second = 2\n        third\
+      \ = 3\n    }\n    "
+    selected: false
+    status: Unchecked
+  - offset: 287
+    length: 94
+    placeholder_text: "\n    y?.let {\n        with(it) {\n            start()\n \
+      \           finish()\n        }\n    }\n    "
+    initial_state:
+      length: 94
+      offset: 287
+    initialized_from_dependency: false
+    possible_answer: "y?.run {\n        start()\n        finish()\n    }\n    "
+    selected: false
+    status: Unchecked
+  - offset: 441
+    length: 66
+    placeholder_text: "\n    val result = with(z) {\n        init()\n        this\n\
+      \    }\n    "
+    initial_state:
+      length: 66
+      offset: 441
+    initialized_from_dependency: false
+    possible_answer: " val result = z.apply {\n        init()\n    }\n    "
+    selected: false
+    status: Unchecked
+  text: "package libraryHelpers1\n\nclass X {\n    var first = 0\n    var second =\
+    \ 0\n    var third = 0\n}\n\nfun example1(x: X) {\n    \n    x.let {\n       \
+    \ it.first = 1\n        it.second = 2\n        it.third = 3\n    }\n    \n}\n\n\
+    class Y {\n    fun start() {}\n    fun finish() {}\n}\n\nfun example2(y: Y?) {\n\
+    \    \n    y?.let {\n        with(it) {\n            start()\n            finish()\n\
+    \        }\n    }\n    \n}\n\nclass Z {\n    fun init() {}\n}\n\nfun example3(z:\
+    \ Z) {\n    \n    val result = with(z) {\n        init()\n        this\n    }\n\
+    \    \n}\n\nfun main(args: Array<String>) {\n    example1(X())\n    example2(Y())\n\
+    \    example3(Z())\n}"
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |+
+    package libraryHelpers1
+
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Functional+Programming+%2F+Library+Helpers+%2F+Exercise1
+status: Unchecked
+record: -1

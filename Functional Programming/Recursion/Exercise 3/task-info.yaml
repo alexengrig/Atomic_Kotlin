@@ -1,0 +1,174 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 489
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 489
+    initialized_from_dependency: false
+    possible_answer: "\n        if (current in connections) return\n        connections\
+      \ += current\n\n        if (current == to) return\n\n        current.connections.forEach\
+      \ {\n            buildConnections(it)\n        }\n        "
+    selected: false
+    status: Unchecked
+  - offset: 838
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 838
+    initialized_from_dependency: false
+    possible_answer: "\n        if (current == to) return true\n        if (current\
+      \ in connections) continue\n        connections += current\n\n        current.connections.forEach\
+      \ {\n            citiesToVisit += it\n        }\n        "
+    selected: false
+    status: Unchecked
+  text: |-
+    package recursion3
+
+    import atomictest.eq
+
+    class City(val name: String) {
+        val connections = mutableListOf<City>()
+
+        override fun toString() = "($name, " +
+                "connections: ${connections.map { it.name }})"
+    }
+
+    fun addConnection(first: City, second: City) {
+        first.connections += second
+        second.connections += first
+    }
+
+    fun isReachableRecursive(from: City, to: City): Boolean {
+        val connections = mutableSetOf<City>()
+
+        fun buildConnections(current: City) {
+            TODO()
+        }
+
+        buildConnections(from)
+        return to in connections
+    }
+
+    fun isReachableIterative(from: City, to: City): Boolean {
+        val connections = mutableSetOf<City>()
+        val citiesToVisit = mutableSetOf(from)
+        while (citiesToVisit.isNotEmpty()) {
+            val current = citiesToVisit.first()
+            citiesToVisit.remove(current)
+
+            TODO()
+        }
+        return false
+    }
+
+    fun main(args: Array<String>) {
+        val dublin = City("Dublin")
+        val liverpool = City("Liverpool")
+        val manchester = City("Manchester")
+        val leeds = City("Leeds")
+
+        addConnection(liverpool, manchester)
+        addConnection(manchester, leeds)
+
+        isReachableRecursive(liverpool, leeds) eq true
+        isReachableRecursive(liverpool, dublin) eq false
+
+        isReachableIterative(liverpool, leeds) eq true
+        isReachableIterative(liverpool, dublin) eq false
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package recursion3
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestReachable {
+        private fun checkRecursiveSample(from: City, to: City, result: Boolean) {
+            Assert.assertEquals("Wrong result for sample 'isReachableRecursive(${from.name}, ${to.name})'", result,
+                    isReachableRecursive(from, to))
+        }
+
+        private fun checkIterativeSample(from: City, to: City, result: Boolean) {
+            Assert.assertEquals("Wrong result for sample 'isReachableRecursive(${from.name}, ${to.name})'", result,
+                    isReachableIterative(from, to))
+        }
+
+        private fun checkRecursive(cities: List<City>, from: City, to: City, result: Boolean) {
+            Assert.assertEquals("Wrong result for 'isReachableRecursive(${from.name}, ${to.name})' in $cities", result,
+                    isReachableRecursive(from, to))
+        }
+
+        private fun checkIterative(cities: List<City>, from: City, to: City, result: Boolean) {
+            Assert.assertEquals("Wrong result for 'isReachableRecursive(${from.name}, ${to.name})' in $cities", result,
+                    isReachableIterative(from, to))
+        }
+
+        @Test
+        fun test1Sample() {
+            val dublin = City("Dublin")
+            val liverpool = City("Liverpool")
+            val manchester = City("Manchester")
+            val leeds = City("Leeds")
+
+            addConnection(liverpool, manchester)
+            addConnection(manchester, leeds)
+
+            checkRecursiveSample(liverpool, leeds, true)
+            checkRecursiveSample(liverpool, dublin, false)
+            checkIterativeSample(liverpool, leeds, true)
+            checkIterativeSample(liverpool, dublin, false)
+        }
+
+        @Test
+        fun test2() {
+            val cities = (0..4).map { City("City$it") }
+
+            addConnections(cities, 0 to 1, 1 to 2, 2 to 3, 3 to 4)
+
+            checkRecursive(cities, cities[0], cities[4], true)
+            checkIterative(cities, cities[0], cities[4], true)
+        }
+
+        @Test
+        fun test3() {
+            val cities = (0..1).map { City("City$it") }
+            addConnections(cities)
+
+            checkRecursive(cities, cities[0], cities[1], false)
+            checkIterative(cities, cities[0], cities[1], false)
+        }
+
+        private fun addConnections(cities: List<City>, vararg pairs: Pair<Int, Int>) {
+            pairs.forEach {
+                addConnection(cities[it.first], cities[it.second])
+            }
+        }
+
+        @Test
+        fun test4() {
+            val cities = (0..9).map { City("City$it") }
+            addConnections(cities, 1 to 2, 2 to 4, 4 to 5, 1 to 3, 3 to 6, 3 to 7, 8 to 9)
+
+            checkRecursive(cities, cities[1], cities[5], true)
+            checkRecursive(cities, cities[1], cities[8], false)
+            checkIterative(cities, cities[1], cities[5], true)
+            checkIterative(cities, cities[1], cities[8], false)
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Functional+Programming+%2F+Recursion+%2F+Exercise3
+status: Unchecked
+record: -1

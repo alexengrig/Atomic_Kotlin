@@ -1,0 +1,71 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 116
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 116
+    initialized_from_dependency: false
+    possible_answer: |-
+      if (n < 0) throw IllegalArgumentException("Count 'n' must be non-negative, but was $n.")
+          var s = ""
+          repeat (n) {
+              s += ch
+          }
+          return s
+    selected: false
+    status: Unchecked
+  text: |-
+    package exceptions1
+
+    import atomictest.capture
+    import atomictest.eq
+
+    fun repeatChar(ch: Char, n: Int): String {
+        TODO()
+    }
+
+    fun main(args: Array<String>) {
+        repeatChar('a', 4) eq "aaaa"
+        capture {
+            repeatChar('c', -2)
+        } eq "IllegalArgumentException: Count 'n' must be non-negative, but was -2."
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package exceptions1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestExceptions1 {
+        @Test
+        fun test1Positive() = Assert.assertEquals("qqq", repeatChar('q', 3))
+
+        @Test
+        fun test2Zero() = Assert.assertEquals("", repeatChar('v', 0))
+
+        @Test
+        fun test2Negative() {
+            try {
+                repeatChar('v', -5)
+                throw AssertionError("""IllegalArgumentException should be thrown for "repeatChar('v', -5)"""")
+            } catch (e: IllegalArgumentException) {
+                Assert.assertEquals("Incorrect exception message: ", "Count 'n' must be non-negative, but was -5.", e.message)
+            }
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Introduction+to+Objects+%2F+Exceptions+%2F+Exercise1
+status: Unchecked
+record: -1

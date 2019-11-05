@@ -1,0 +1,106 @@
+type: theory
+files:
+- name: src/Level.kt
+  visible: true
+  text: |-
+    // Enumerations/Level.kt
+    package enumerations
+    import atomictest.eq
+
+    enum class Level {
+      Overflow, High, Medium, Low, Empty
+    }
+
+    fun main(args: Array<String>) {
+      Level.Medium eq "Medium"
+    }
+  learner_created: false
+- name: src/EnumImport.kt
+  visible: true
+  text: |-
+    // Enumerations/EnumImport.kt
+    import atomictest.eq
+    import enumerations.Level.*    // [1]
+
+    fun main(args: Array<String>) {
+      Overflow eq "Overflow"
+      High eq "High"
+    }
+  learner_created: false
+- name: src/RecursiveEnumImport.kt
+  visible: true
+  text: |-
+    // Enumerations/RecursiveEnumImport.kt
+    package enumerations
+    import atomictest.eq
+    import enumerations.Size.*            // [1]
+
+    enum class Size {
+      Tiny, Small, Medium, Large, Huge, Gigantic
+    }
+
+    fun main(args: Array<String>) {
+      Gigantic eq "Gigantic"               // [2]
+      Size.values().toList() eq            // [3]
+        listOf(Tiny, Small, Medium,
+          Large, Huge, Gigantic)
+      Tiny.ordinal eq 0                    // [4]
+      Huge.ordinal eq 4
+    }
+  learner_created: false
+- name: src/CheckingOptions.kt
+  visible: true
+  text: |-
+    // Enumerations/CheckingOptions.kt
+    import atomictest.eq
+    import enumerations.Level
+    import enumerations.Level.*
+
+    fun checkLevel(level: Level) {
+      when (level) {
+        Overflow -> println(">>> Overflow!")
+        Empty -> println("Alert: Empty")
+        else -> println("Level $level OK")
+      }
+    }
+
+    fun main(args: Array<String>) {
+      checkLevel(Empty)
+      checkLevel(Low)
+      checkLevel(Overflow)
+    }
+    /* Output:
+    Alert: Empty
+    Level Low OK
+    >>> Overflow!
+    */
+  learner_created: false
+- name: src/Direction.kt
+  visible: true
+  text: |-
+    // Enumerations/Direction.kt
+    package enumerations
+    import atomictest.eq
+    import enumerations.Direction.*
+
+    enum class Direction(val notation: String) {
+      NORTH("N"), SOUTH("S"),
+      EAST("E"), WEST("W");
+      val opposite: Direction
+        get() = when (this) {
+          NORTH -> SOUTH
+          SOUTH -> NORTH
+          WEST -> EAST
+          EAST -> WEST
+        }
+    }
+
+    fun main(args: Array<String>) {
+      NORTH.notation eq "N"
+      NORTH.opposite eq SOUTH
+      WEST.opposite.opposite eq WEST
+      NORTH.opposite.notation eq "S"
+    }
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,164 @@
+type: theory
+files:
+- name: src/GermanOrdinals.kt
+  visible: true
+  text: |-
+    // WhenExpressions/GermanOrdinals.kt
+    import atomictest.eq
+
+    val numbers = mapOf(
+      1 to "eins", 2 to "zwei", 3 to "drei",
+      4 to "vier", 5 to "fuenf", 6 to "sechs",
+      7 to "sieben", 8 to "acht", 9 to "neun",
+      10 to "zehn", 11 to "elf", 12 to "zwoelf",
+      13 to "dreizehn", 14 to "vierzehn",
+      15 to "fuenfzehn", 16 to "sechzehn",
+      17 to "siebzehn", 18 to "achtzehn",
+      19 to "neunzehn", 20 to "zwanzig"
+    )
+
+    fun ordinal(i: Int): String =
+      when (i) {                            // [1]
+        1 -> "erste"                        // [2]
+        3 -> "dritte"
+        7 -> "siebte"
+        8 -> "achte"
+        20 -> "zwanzigste"
+        else -> numbers.getValue(i) + "te"  // [3]
+      }
+
+    fun main(args: Array<String>) {
+      ordinal(2) eq "zweite"
+      ordinal(3) eq "dritte"
+      ordinal(11) eq "elfte"
+    }
+  learner_created: false
+- name: src/AnalyzingInput.kt
+  visible: true
+  text: |-
+    // WhenExpressions/AnalyzingInput.kt
+
+    class Coordinates(var x: Int, var y: Int) {
+      override fun toString(): String {
+        return "($x, $y)"
+      }
+    }
+
+    fun main(args: Array<String>) {
+      println("""|Welcome! Type 'up', 'down',
+        |'left', 'right' or 'nowhere' to move;
+        |'exit' to exit.""".trimMargin())
+      val coordinates = Coordinates(0, 0)
+      while (true) {
+        println("Your coordinates: $coordinates")
+        println("Where do you want to move?")
+        when (readLine()) {                // [1]
+          "up", "u" -> coordinates.y--     // [2]
+          "down", "d" -> coordinates.y++
+          "left", "l" -> coordinates.x--
+          "right", "r" -> {                // [3]
+            coordinates.x++
+          }
+          "nowhere" -> {}                  // [4]
+          "exit" -> return                 // [5]
+          else -> println("Sorry, " +
+            "I don't understand you")
+        }
+      }
+    }
+    /* Input/Output:
+    Welcome! Type 'up', 'down',
+    'left', 'right' or 'nowhere' to move;
+    'exit' to exit.
+    Your coordinates: (0, 0)
+    Where do you want to move?
+    >>> right
+    Your coordinates: (1, 0)
+    Where do you want to move?
+    >>> d
+    Your coordinates: (1, 1)
+    Where do you want to move?
+    >>> nowhere
+    Your coordinates: (1, 1)
+    Where do you want to move?
+    >>> exit
+    */
+  learner_created: false
+- name: src/MatchingAgainstVals.kt
+  visible: true
+  text: |-
+    // WhenExpressions/MatchingAgainstVals.kt
+
+    fun main(args: Array<String>) {
+      val yes = "yes"
+      val no = "no"
+      val choice = readLine()
+      when (choice) {
+        yes -> println("Hooray!")
+        no -> println("Too bad!")
+      }
+      // The same code rewritten with if:
+      if (choice == yes) println("Hooray!")
+      else if (choice == no) println("Too bad!")
+    }
+    /* Input/Output:
+    >>> yes
+    Hooray!
+    Hooray!
+    */
+  learner_created: false
+- name: src/MixColors.kt
+  visible: true
+  text: |-
+    // WhenExpressions/MixColors.kt
+    import atomictest.eq
+
+    fun mixColors(first: String, second: String) =
+      when (setOf(first, second)) {
+        setOf("red", "blue") -> "purple"
+        setOf("red", "yellow") -> "orange"
+        setOf("blue", "yellow") -> "green"
+        else -> "unknown"
+      }
+
+    fun main(args: Array<String>) {
+      mixColors("red", "blue") eq "purple"
+      mixColors("blue", "red") eq "purple"
+      mixColors("blue", "purple") eq "unknown"
+    }
+  learner_created: false
+- name: src/BmiWhen.kt
+  visible: true
+  text: |-
+    // WhenExpressions/BmiWhen.kt
+    import atomictest.eq
+
+    fun bmiStatusOld(
+      kg: Double,
+      heightM: Double
+    ): String {
+      val bmi = kg / (heightM * heightM)
+      return if (bmi < 18.5) "Underweight"
+        else if (bmi < 25) "Normal weight"
+        else "Overweight"
+    }
+
+    fun bmiStatusWithWhen(
+      kg: Double,
+      heightM: Double
+    ): String {
+      val bmi = kg / (heightM * heightM)
+      return when {
+        bmi < 18.5 -> "Underweight"
+        bmi < 25 -> "Normal weight"
+        else -> "Overweight"
+      }
+    }
+
+    fun main(args: Array<String>) {
+      bmiStatusOld(72.57, 1.727) eq
+      bmiStatusWithWhen(72.57, 1.727)
+    }
+  learner_created: false
+status: Unchecked
+record: -1

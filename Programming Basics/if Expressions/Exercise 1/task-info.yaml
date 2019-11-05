@@ -1,0 +1,59 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 61
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 61
+    initialized_from_dependency: false
+    possible_answer: |2-
+
+              if (number > 0)
+                  "positive"
+              else if (number < 0)
+                  "negative"
+              else
+                  "zero"
+    selected: false
+    status: Unchecked
+  text: |-
+    package ifExpressions1
+
+    fun checkSign(number: Int): String = TODO()
+
+    fun main(args: Array<String>) {
+        println(checkSign(-19))  // negative
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package ifExpressions1
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestIfExpressions1 {
+        private fun checkFunction(number: Int, sign: String) {
+            Assert.assertEquals("""checkSign($number) should return "$sign"""",
+                    sign, checkSign(number))
+        }
+
+        @Test fun test1Positive() = checkFunction(10, "positive")
+
+        @Test fun test2Zero() = checkFunction(0, "zero")
+
+        @Test fun test3Negative() = checkFunction(-10, "negative")
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Programming+Basics+%2F+if+Expressions+%2F+Exercise1
+status: Unchecked
+record: -1

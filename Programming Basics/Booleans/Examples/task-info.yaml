@@ -1,0 +1,95 @@
+type: theory
+files:
+- name: src/Booleans1.kt
+  visible: true
+  text: |-
+    // Booleans/Booleans1.kt
+
+    fun main(args: Array<String>) {
+      val hour = 6
+      val open = 9
+      val closed = 20
+      println("Operating hours: $open - $closed")
+      val isOpen =
+        if (hour >= open && hour <= closed) // [1]
+          true
+        else
+          false
+      println("Open: $isOpen")
+    }
+    /* Output:
+    Operating hours: 9 - 20
+    Open: false
+    */
+  learner_created: false
+- name: src/Booleans2.kt
+  visible: true
+  text: |-
+    // Booleans/Booleans2.kt
+
+    fun main(args: Array<String>) {
+      val hour = 6
+      val open = 9
+      val closed = 20
+      println("Operating hours: $open - $closed")
+      val isOpen = hour >= open && hour <= closed
+      println("Open: $isOpen")
+    }
+    /* Output:
+    Operating hours: 9 - 20
+    Open: false
+    */
+  learner_created: false
+- name: src/Booleans3.kt
+  visible: true
+  text: |-
+    // Booleans/Booleans3.kt
+
+    fun main(args: Array<String>) {
+      val hour = 6
+      val open = 9
+      val closed = 20
+      println("Operating hours: $open - $closed")
+      val isClosed = hour < open || hour > closed
+      println("Closed: $isClosed")
+    }
+    /* Output:
+    Operating hours: 9 - 20
+    Closed: true
+    */
+  learner_created: false
+- name: src/EvaluationOrder.kt
+  visible: true
+  text: |-
+    // Booleans/EvaluationOrder.kt
+
+    fun main(args: Array<String>) {
+      val sunny = true
+      val hoursSleep = 6
+      val exercise = false
+      val temp = 55
+
+      // [1]:
+      val happy1 = sunny && temp > 50 ||
+        exercise && hoursSleep > 7
+      println(happy1)
+
+      // [2]:
+      val sameHappy1 = (sunny && temp > 50) ||
+        (exercise && hoursSleep > 7)
+      println(sameHappy1)
+
+      // [3]:
+      val notSame =
+        (sunny && temp > 50 || exercise) &&
+          hoursSleep > 7
+      println(notSame)
+    }
+    /* Output:
+    true
+    true
+    false
+    */
+  learner_created: false
+status: Unchecked
+record: -1

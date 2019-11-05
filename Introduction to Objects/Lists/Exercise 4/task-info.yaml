@@ -1,0 +1,21 @@
+type: ide
+files:
+- name: src/Task.kt
+  visible: true
+  text: |-
+    package lists4
+
+    fun main(args: Array<String>) {
+        val list = listOf(1, 4, "abc")
+        println(list)
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |
+    package lists4
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Introduction+to+Objects+%2F+Lists+%2F+Exercise4
+status: Unchecked
+record: -1

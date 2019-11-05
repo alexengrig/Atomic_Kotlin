@@ -1,0 +1,85 @@
+type: edu
+files:
+- name: src/Task.kt
+  visible: true
+  placeholders:
+  - offset: 181
+    length: 6
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 181
+    initialized_from_dependency: false
+    possible_answer: "\n    for ((index, e) in this.withIndex()) {\n        val transformed\
+      \ = transform(index, e)\n        if (transformed != null) {\n            result\
+      \ += transformed\n        }\n    }\n    "
+    selected: false
+    status: Unchecked
+  text: |-
+    package functionTypes3
+
+    import atomictest.eq
+
+    fun <T, R : Any> Iterable<T>.mapIndexedNotNull(
+            transform: (Int, T) -> R?
+    ): List<R> {
+        val result = mutableListOf<R>()
+        TODO()
+        return result
+    }
+
+    fun main(args: Array<String>) {
+        val list = listOf("a", "b", "c", "d")
+        list.mapIndexedNotNull { index, s ->
+            if (index % 2 == 0) "$s!" else null
+        } eq listOf("a!", "c!")
+    }
+  learner_created: false
+- name: test/Tests.kt
+  visible: false
+  text: |-
+    package functionTypes3
+
+    import org.junit.Assert
+    import org.junit.FixMethodOrder
+    import org.junit.Test
+    import org.junit.runners.MethodSorters
+    import kotlin.collections.mapIndexedNotNull as mapIndexedNotNullLibrary
+
+    @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+    class TestMapIndexedNotNullImpl {
+        private fun <T, R : Any> check(
+                list: List<T>,
+                predicateStr: String,
+                predicate: (Int, T) -> R?
+        ) {
+            Assert.assertEquals("Wrong result for $list\n" +
+                    "predicate = $predicateStr",
+                    list.mapIndexedNotNull(predicate),
+                    list.mapIndexedNotNullLibrary(predicate))
+        }
+
+        @Test
+        fun test1Sample() = check(listOf(1, 2, 3), "{ index, e -> \"\$index: \$e!\" }") { index, e -> "$index: $e!" }
+
+        @Test
+        fun test2() = check(listOf("1", "2", "3"), "{ index, e -> index + e.toInt() }") { index, e -> index + e.toInt() }
+
+        @Test
+        fun test3() = check(listOf("1", "2", "d"),
+                """
+                {
+                    index, e ->
+                    val i = e.toIntOrNull()
+                    if (i == null) null else index * i
+                }""".replaceIndent()
+        ) { index, e ->
+            val i = e.toIntOrNull()
+            if (i == null) null else index * i
+        }
+    }
+  learner_created: false
+feedback_link: |
+  https://docs.google.com/forms/d/e/1FAIpQLSdkaliSwYkjiV21bZl0yP-In2g5p17sAQCfaGjyHx_QYMWTiQ/viewform?usp=pp_url&entry.189755027=Functional+Programming+%2F+Function+Types+%2F+Exercise3
+status: Unchecked
+record: -1

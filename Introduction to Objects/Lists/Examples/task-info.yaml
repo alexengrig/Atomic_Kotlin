@@ -1,0 +1,152 @@
+type: theory
+files:
+- name: src/Lists.kt
+  visible: true
+  text: |-
+    // Lists/Lists.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      // Lists hold other objects:
+      val ints = listOf(99, 3, 5, 7, 11, 13)
+      ints eq "[99, 3, 5, 7, 11, 13]"      // [1]
+
+      // Select each element in the List:
+      var result = ""
+      for (i in ints)                      // [2]
+        result += "$i "
+      result eq "99 3 5 7 11 13 "
+
+      // "[]" is "Indexing":
+      ints[4] eq 11                        // [3]
+    }
+  learner_created: false
+- name: src/OutOfBounds.kt
+  visible: true
+  text: |-
+    // Lists/OutOfBounds.kt
+    import atomictest.*
+
+    fun main(args: Array<String>) {
+      val ints = listOf(1, 2, 3)
+      capture {
+        ints[3]
+      } eq "ArrayIndexOutOfBoundsException: 3"
+    }
+  learner_created: false
+- name: src/ListUsefulFunction.kt
+  visible: true
+  text: |-
+    // Lists/ListUsefulFunction.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val doubles =
+        listOf(1.1, 2.2, 3.3, 4.4)
+      doubles.min() eq 1.1
+      doubles.max() eq 4.4
+
+      val strings = listOf("Twas", "Brillig",
+        "And", "Slithy", "Toves")
+      strings eq listOf("Twas", "Brillig",
+        "And", "Slithy", "Toves")
+      strings.sorted() eq listOf("And",
+        "Brillig", "Slithy", "Toves", "Twas")
+      strings.reversed() eq listOf("Toves",
+        "Slithy", "And", "Brillig", "Twas")
+      strings.first() eq "Twas"
+      strings.takeLast(2) eq
+        listOf("Slithy", "Toves")
+    }
+  learner_created: false
+- name: src/ParameterizedTypes.kt
+  visible: true
+  text: |-
+    // Lists/ParameterizedTypes.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      // Type is inferred:
+      val numbers = listOf(1, 2, 3)
+      val strings =
+        listOf("one", "two", "three")
+      // Exactly the same, but explicitly typed:
+      val numbers2: List<Int> = listOf(1, 2, 3)
+      val strings2: List<String> =
+        listOf("one", "two", "three")
+      numbers eq numbers2
+      strings eq strings2
+    }
+  learner_created: false
+- name: src/ParameterizedReturn.kt
+  visible: true
+  text: |-
+    // Lists/ParameterizedReturn.kt
+    import atomictest.eq
+
+    // Return type is inferred:
+    fun inferred(c1: Char, c2: Char) =
+      listOf(c1, c2)
+
+    // Explicit return type:
+    fun explicit(c1: Char, c2: Char): List<Char> =
+      listOf(c1, c2)
+
+    fun main(args: Array<String>) {
+      inferred('a', 'b') eq "[a, b]"
+      explicit('y', 'z') eq "[y, z]"
+    }
+  learner_created: false
+- name: src/MutableList.kt
+  visible: true
+  text: |-
+    // Lists/MutableList.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val list = mutableListOf<Int>()
+
+      list.add(1)
+      list.addAll(listOf(2, 3))
+
+      list += 4
+      list += listOf(5, 6)
+
+      list eq listOf(1, 2, 3, 4, 5, 6)
+    }
+  learner_created: false
+- name: src/MutListIsList.kt
+  visible: true
+  text: |-
+    // Lists/MutListIsList.kt
+    import atomictest.eq
+
+    fun getList(): List<Int> {
+      return mutableListOf(1, 2, 3)
+    }
+
+    fun main(args: Array<String>) {
+      // getList() produces a read-only List:
+      val list = getList()
+      // list += 3 // Error
+      list eq listOf(1, 2, 3)
+    }
+  learner_created: false
+- name: src/MultipleListRefs.kt
+  visible: true
+  text: |-
+    // Lists/MultipleListRefs.kt
+    import atomictest.eq
+
+    fun main(args: Array<String>) {
+      val first = mutableListOf(1)
+      val second: List<Int> = first
+      second eq listOf(1)
+
+      first += 2
+      // second sees the change:
+      second eq listOf(1, 2)
+    }
+  learner_created: false
+status: Unchecked
+record: -1
